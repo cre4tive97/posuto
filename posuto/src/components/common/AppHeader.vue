@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <AppLogo />
+    <router-link to="/main"><AppLogo /></router-link>
   </div>
 </template>
 

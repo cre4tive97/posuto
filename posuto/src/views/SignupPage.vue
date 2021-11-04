@@ -1,6 +1,6 @@
 <template>
-  <div>
-    signup
+  <div class="signupPage">
+    <p class="form__title">Sign Up</p>
     <SignupForm />
   </div>
 </template>
