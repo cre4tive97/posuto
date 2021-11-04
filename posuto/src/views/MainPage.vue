@@ -1,9 +1,20 @@
 <template>
-  <div>main</div>
+  <div class="main">
+    <PostListView />
+  </div>
 </template>
 
 <script>
-export default {};
+import PostListView from '@/components/PostListView.vue';
+export default {
+  components: {
+    PostListView,
+  },
+};
 </script>
 
-<style></style>
+<style scoped>
+.main {
+  padding: 0 12px;
+}
+</style>

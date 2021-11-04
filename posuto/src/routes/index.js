@@ -8,7 +8,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/MainPage.vue'),
+      redirect: '/login',
     },
     {
       path: '/login',
@@ -17,6 +17,10 @@ const router = new Router({
     {
       path: '/signup',
       component: () => import('@/views/SignupPage.vue'),
+    },
+    {
+      path: '/main',
+      component: () => import('@/views/MainPage.vue'),
     },
   ],
 });
