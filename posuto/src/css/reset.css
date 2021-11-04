@@ -42,5 +42,5 @@ button {
 *:after,
 *:before {
 	box-sizing: border-box;
-	font-family: 'Spoqa Han Sans', 'Sans-serif';
+	font-family: 'Roboto', sans-serif;
 }

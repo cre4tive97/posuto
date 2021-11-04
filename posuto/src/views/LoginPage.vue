@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="loginPage">
+    <p style="font-size: 3rem">Login</p>
     <LoginForm />
   </div>
 </template>
@@ -14,4 +15,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

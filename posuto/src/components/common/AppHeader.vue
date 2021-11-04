@@ -19,7 +19,8 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 4rem;
-  background-color: var(--main-color);
+  height: 3rem;
+  background-color: var(--main-dark);
+  padding: 0 12px;
 }
 </style>

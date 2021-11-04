@@ -3,3 +3,7 @@
     --main-dark : #5d99c6;
     --main-light : #c3fdff;
 }
+
+body {
+    background-color: #F5F5F6
+}
