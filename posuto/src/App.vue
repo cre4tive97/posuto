@@ -5,11 +5,8 @@
 </template>
 
 <script>
-import Test from '@/views/Test.vue';
-
 export default {
   name: 'App',
-  components: {},
 };
 </script>
 
