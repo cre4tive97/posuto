@@ -3,7 +3,7 @@
     <AppHeader />
     <router-view></router-view>
     <transition name="settingAnimation">
-      <AppSetting />
+      <AppSetting v-if="settingState" />
     </transition>
     <button class="setting__btn" @click="settingState = !settingState">
       <i class="fas fa-user-cog"></i>
@@ -31,4 +31,20 @@ export default {
 <style>
 @import './css/reset.css';
 @import './css/style.css';
+.settingAnimation-enter {
+  opacity: 0;
+  transform: translateX(200px);
+}
+.settingAnimation-enter-active,
+.settingAnimation-leave-active {
+  transition: all 0.5s;
+}
+/* .settingAnimation-enter {
+  opacity: 1;
+  transform: translateX(0px);
+} */
+.settingAnimation-leave-to {
+  opacity: 0;
+  transform: translateX(200px);
+}
 </style>
