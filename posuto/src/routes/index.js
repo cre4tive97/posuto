@@ -8,7 +8,15 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/Test.vue'),
+      component: () => import('@/views/MainPage.vue'),
+    },
+    {
+      path: '/login',
+      component: () => import('@/views/LoginPage.vue'),
+    },
+    {
+      path: '/signup',
+      component: () => import('@/views/SignupPage.vue'),
     },
   ],
 });
