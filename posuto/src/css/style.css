@@ -54,3 +54,42 @@ body {
     font-size: 3.5rem;
     margin-bottom: 2rem;
   }
+
+  .setting__btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    border-style: none;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: rgba(2, 93, 203, 0.6);
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+  .setting__btn:hover {
+    transform: scale(1.1);
+    color: rgba(2, 93, 203, 1);
+    cursor: pointer;
+  }
+
+  .settingAnimation-enter-from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  .settingAnimation-enter-active,
+  .settingAnimation-leave-active {
+    transition: all 0.5s;
+  }
+  .settingAnimation-enter-to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  .settingAnimation-leave-to {
+    opacity: 0;
+    transform: translateX(200px);
+  }

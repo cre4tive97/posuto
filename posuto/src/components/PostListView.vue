@@ -1,18 +1,18 @@
 <template>
-  <ul>
-    <Draggable>
-      <transition-group class="post__ul">
-        <li v-for="(list, i) in lists" :key="i">
-          <div v-resize:debounce="onResize" class="post__item">
-            <h1>{{ list.title }}</h1>
-            <hr />
-            <p>{{ list.content }}</p>
-            {{ width }} {{ height }}
-          </div>
-        </li>
-      </transition-group>
-    </Draggable>
-  </ul>
+  <Draggable>
+    <transition-group class="post__ul">
+      <div
+        v-for="(list, i) in lists"
+        :key="i"
+        v-resize:debounce="onResize"
+        class="post__item"
+      >
+        <h1>{{ list.title }}</h1>
+        <hr />
+        {{ list.content }}
+      </div>
+    </transition-group>
+  </Draggable>
 </template>
 
 <script>
@@ -23,7 +23,11 @@ export default {
     return {
       lists: [
         { title: 'a', content: 'adsfadf' },
-        { title: 'b', content: 'adsfadf' },
+        {
+          title: 'b',
+          content:
+            'adsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadf',
+        },
         { title: 'c', content: 'adsfadf' },
       ],
       width: 0,
@@ -60,7 +64,7 @@ export default {
   background-color: pink;
   margin: 8px;
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.4);
-  overflow: auto;
+  overflow-wrap: break-word;
   resize: both;
 }
 .post__item h1 {
