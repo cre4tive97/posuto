@@ -8,6 +8,8 @@
       @mouseleave="onMouseLeave(i)"
       :gs-w="`${list.width}`"
       :gs-h="`${list.height}`"
+      gs-min-w="3"
+      gs-min-h="5"
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
@@ -62,11 +64,6 @@ export default {
           navigator.userAgent,
         ),
     });
-    this.grid.on('dragstop', (event, element) => {
-      const node = element.gridstackNode;
-      // `this` will only access your Vue instance if you used an arrow function, otherwise `this` binds to window scope. see https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/
-      this.info = `you just dragged node #${node.id} to ${node.x},${node.y} – good job!`;
-    });
   },
   methods: {
     onMouseOver(i) {
@@ -80,7 +77,6 @@ export default {
         w: 4,
         h: 6,
       };
-      node.id = node.content = String(this.count++);
       this.grid.addWidget(node);
     },
   },
