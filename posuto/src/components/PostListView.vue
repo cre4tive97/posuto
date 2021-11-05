@@ -6,11 +6,12 @@
         :key="i"
         v-resize:debounce="onResize"
         class="post__item"
-        @mouseover="onMouseOver"
+        @mouseover="onMouseOver(i)"
+        @mouseleave="onMouseLeave(i)"
       >
         <div class="post__header">
           <h1>{{ list.title }}</h1>
-          <div v-if="hoverState" class="post__btnGroup">
+          <div ref="btnGroup" class="post__btnGroup hidden">
             <i class="far fa-edit"></i>
             <i class="far fa-trash-alt"></i>
           </div>
@@ -39,7 +40,6 @@ export default {
       ],
       width: 0,
       height: 0,
-      hoverState: false,
     };
   },
   components: {
@@ -53,11 +53,11 @@ export default {
       console.log(e.style.width);
       console.log(e.style.height);
     },
-    onMouseOver() {
-      this.hoverState = true;
+    onMouseOver(i) {
+      this.$refs.btnGroup[i].classList.remove('hidden');
     },
-    onMouseLeave() {
-      this.hoverState = false;
+    onMouseLeave(i) {
+      this.$refs.btnGroup[i].classList.add('hidden');
     },
   },
 };

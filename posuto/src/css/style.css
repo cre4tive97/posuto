@@ -9,6 +9,10 @@ body {
     color : #2f2f2f;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Form */
 .form {
     display: flex;
