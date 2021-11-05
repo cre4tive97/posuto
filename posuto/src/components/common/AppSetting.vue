@@ -13,7 +13,8 @@ export default {};
   right: 1rem;
   border-radius: 1rem;
   padding: 8px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(94, 154, 198, 0.3);
+  /* border: 1px solid rgba(62, 138, 193, 0.3); */
   backdrop-filter: blur(16px);
   width: 50%;
   max-width: 400px;

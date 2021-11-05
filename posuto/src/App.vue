@@ -6,7 +6,7 @@
       <AppSetting v-if="settingState" />
     </transition>
     <button class="setting__btn" @click="settingState = !settingState">
-      <i class="fas fa-user-cog"></i>
+      <i class="fas fa-cog"></i>
     </button>
   </div>
 </template>
@@ -39,10 +39,6 @@ export default {
 .settingAnimation-leave-active {
   transition: all 0.5s;
 }
-/* .settingAnimation-enter {
-  opacity: 1;
-  transform: translateX(0px);
-} */
 .settingAnimation-leave-to {
   opacity: 0;
   transform: translateX(200px);

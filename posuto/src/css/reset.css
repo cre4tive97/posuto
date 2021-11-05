@@ -46,5 +46,10 @@ a {
 *:after,
 *:before {
 	box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
+	/* font-family: 'Roboto', sans-serif; */
+}
+
+.fa, .fas {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
 }

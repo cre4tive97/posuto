@@ -8,6 +8,8 @@ body {
     background-color: #F5F5F6;
     color : #2f2f2f;
 }
+
+/* Form */
 .form {
     display: flex;
     flex-direction: column;
@@ -35,6 +37,7 @@ body {
     min-width: 300px;
     max-width: 700px;
   }
+ 
 .btn {
     padding: 6px 12px;
     border: none;
@@ -55,6 +58,8 @@ body {
     margin-bottom: 2rem;
   }
 
+/* Setting */
+
   .setting__btn {
     position: fixed;
     bottom: 1rem;
@@ -67,13 +72,13 @@ body {
     align-items: center;
     width: 2.5rem;
     height: 2.5rem;
-    color: rgba(2, 93, 203, 0.6);
+    color: rgba(94, 154, 198, 0.7);
     border-radius: 50%;
     transition: all 0.3s;
   }
   .setting__btn:hover {
     transform: scale(1.1);
-    color: rgba(2, 93, 203, 1);
+    color: rgba(94, 154, 198,1);
     cursor: pointer;
   }
 

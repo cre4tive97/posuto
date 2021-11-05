@@ -2,8 +2,12 @@
   <div class="header">
     <router-link to="/main"><AppLogo /></router-link>
     <div>
-      <router-link to="/login">login</router-link>
-      <router-link to="/signup">signup</router-link>
+      <router-link to="/login">
+        <button class="link">login</button>
+      </router-link>
+      <router-link to="/signup">
+        <button class="link">signup</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -31,5 +35,12 @@ export default {
     rgba(93, 153, 198, 1) 100%
   );
   padding: 0 12px;
+}
+.link {
+  border: none;
+  background: #88d9ea;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 6px;
 }
 </style>
