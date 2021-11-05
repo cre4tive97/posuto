@@ -6,11 +6,13 @@
       class="grid-stack-item"
       @mouseover="onMouseOver(i)"
       @mouseleave="onMouseLeave(i)"
+      :gs-w="`${list.width}`"
+      :gs-h="`${list.height}`"
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
           <h1>{{ list.title }}</h1>
-          <div ref="btnGroup" class="post__btnGroup hidden" :data-id="i">
+          <div ref="btnGroup" class="post__btnGroup hidden">
             <i class="far fa-edit"></i>
             <i class="far fa-trash-alt"></i>
           </div>
@@ -19,28 +21,27 @@
         <span>{{ list.content }}</span>
       </div>
     </div>
-
-    <button @click="addNewWidget">asdfadsasdfasdfasdfasdfasdfasdfasdf</button>
   </section>
 </template>
 
 <script>
 import 'gridstack/dist/gridstack.min.css';
 import { GridStack } from 'gridstack';
-import resize from 'vue-resize-directive';
 import 'gridstack/dist/h5/gridstack-dd-native';
 
 export default {
   data() {
     return {
       lists: [
-        { title: 'a', content: 'adsfadf' },
+        { title: 'a', content: 'adsfadf', width: 4, height: 6 },
         {
           title: 'b',
           content:
             'adsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadf',
+          width: 4,
+          height: 6,
         },
-        { title: 'c', content: 'adsfadf' },
+        { title: 'c', content: 'adsfadf', width: 4, height: 6 },
       ],
       width: 0,
       height: 0,
@@ -67,12 +68,6 @@ export default {
       this.info = `you just dragged node #${node.id} to ${node.x},${node.y} – good job!`;
     });
   },
-  components: {
-    // Draggable,
-  },
-  directives: {
-    resize,
-  },
   methods: {
     onMouseOver(i) {
       this.$refs.btnGroup[i].classList.remove('hidden');
@@ -82,10 +77,8 @@ export default {
     },
     addNewWidget() {
       const node = {
-        x: Math.round(12 * Math.random()),
-        y: Math.round(5 * Math.random()),
-        w: Math.round(1 + 3 * Math.random()),
-        h: Math.round(1 + 3 * Math.random()),
+        w: 4,
+        h: 6,
       };
       node.id = node.content = String(this.count++);
       this.grid.addWidget(node);
@@ -95,25 +88,11 @@ export default {
 </script>
 
 <style>
-.post__item {
-  padding: 5px;
-  width: 300px;
-  height: 300px;
-  min-width: 200px;
-  min-height: 100px;
-  background-color: pink;
-  margin: 8px;
-  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.4);
-  overflow: auto;
-  overflow-wrap: break-word;
-  resize: both;
-  /* -webkit-user-drag: none; */
-}
-.post__item h1 {
+.post__header h1 {
   font-size: 1.25rem;
   font-weight: 400;
 }
-.post__item p {
+.grid-stack-item-content span {
   font-size: 1rem;
   font-weight: 400;
 }
@@ -134,7 +113,10 @@ export default {
 
 .grid-stack-item-content {
   background: pink;
-  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.4);
+  border-top-right-radius: 1rem;
+  padding: 12px;
+  -webkit-box-shadow: 0px 9px 24px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 9px 24px 3px rgba(0, 0, 0, 0.15);
   overflow: auto;
   overflow-wrap: break-word;
 }
