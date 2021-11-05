@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import registerUser from '@/api/auth';
+import { registerUser } from '@/api/auth';
 import { validateUsername } from '@/utils/validation';
 export default {
   name: 'SignUpForm',
@@ -41,13 +41,17 @@ export default {
   },
   methods: {
     async submitForm() {
-      const { data } = await registerUser({
-        username: this.username,
-        password: this.password,
-        nickname: this.nickname,
-      });
-      console.log(data);
-      this.initForm();
+      try {
+        const { data } = await registerUser({
+          username: this.username,
+          password: this.password,
+          nickname: this.nickname,
+        });
+        console.log(data);
+        this.initForm();
+      } catch (error) {
+        console.log(error.response.data);
+      }
     },
     initForm() {
       this.username = '';
