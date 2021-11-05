@@ -7,7 +7,7 @@ body {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family: 'Spoqa Han Sans', 'Sans-serif';
+	font-family: 'Roboto', sans-serif;
 }
 
 h1,
@@ -46,10 +46,4 @@ a {
 *:after,
 *:before {
 	box-sizing: border-box;
-	/* font-family: 'Roboto', sans-serif; */
-}
-
-.fa, .fas {
-	font-family: "Font Awesome 5 Free";
-	font-weight: 900;
 }

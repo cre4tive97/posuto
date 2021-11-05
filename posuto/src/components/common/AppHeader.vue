@@ -35,6 +35,9 @@ export default {
     rgba(93, 153, 198, 1) 100%
   );
   padding: 0 12px;
+  z-index: 5;
+  position: sticky;
+  top: 0;
 }
 .link {
   border: none;
