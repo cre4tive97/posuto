@@ -1,23 +1,61 @@
 <template>
-  <form class="form">
+  <form class="form" @submit.prevent="submitForm">
     <div class="form-box">
       <label for="username">Username</label>
-      <input class="input" id="username" type="text" />
+      <input class="input" id="username" type="text" v-model="username" />
     </div>
     <div class="form-box">
-      <label for="username">Password</label>
-      <input class="input" id="username" type="text" />
+      <label for="password">Password</label>
+      <input class="input" id="password" type="text" v-model="password" />
     </div>
     <div class="form-box">
-      <label for="username">Nickname</label>
-      <input class="input" id="username" type="text" />
+      <label for="nickname">Nickname</label>
+      <input class="input" id="nickname" type="text" v-model="nickname" />
     </div>
-    <button class="btn">Sign up</button>
+    <button
+      class="btn"
+      :disabled="!isUsernameValid || !username || !password || !nickname"
+    >
+      Sign up
+    </button>
   </form>
 </template>
 
 <script>
-export default {};
+import registerUser from '@/api/auth';
+import { validateUsername } from '@/utils/validation';
+export default {
+  name: 'SignUpForm',
+  data() {
+    return {
+      //form data
+      username: '',
+      password: '',
+      nickname: '',
+    };
+  },
+  computed: {
+    isUsernameValid() {
+      return validateUsername(this.username);
+    },
+  },
+  methods: {
+    async submitForm() {
+      const { data } = await registerUser({
+        username: this.username,
+        password: this.password,
+        nickname: this.nickname,
+      });
+      console.log(data);
+      this.initForm();
+    },
+    initForm() {
+      this.username = '';
+      this.password = '';
+      this.nickname = '';
+    },
+  },
+};
 </script>
 
 <style></style>
