@@ -24,21 +24,27 @@
     >
       Sign up
     </button>
+    <SignupModal v-if="signupSuccess" :nickname="registerdNickname" />
   </form>
 </template>
 
 <script>
 import { registerUser } from '@/api/auth';
-
+import SignupModal from '@/components/SignupModal.vue';
 import FormMixin from '@/mixins/FormMixin';
 export default {
   name: 'SignUpForm',
+  components: {
+    SignupModal,
+  },
   data() {
     return {
       //form data
       username: '',
       password: '',
       nickname: '',
+      registerdNickname: '',
+      signupSuccess: false,
     };
   },
   mixins: [FormMixin],
@@ -50,7 +56,8 @@ export default {
           password: this.password,
           nickname: this.nickname,
         });
-        console.log(data);
+        this.registerdNickname = data.nickname;
+        this.signupSuccess = true;
         this.initForm();
       } catch (error) {
         console.log(error.response.data);
