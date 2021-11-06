@@ -24,7 +24,9 @@
     >
       Sign up
     </button>
-    <SignupModal v-if="signupSuccess" :nickname="registerdNickname" />
+    <transition name="modalAnimation">
+      <SignupModal v-if="signupSuccess" :nickname="registerdNickname" />
+    </transition>
   </form>
 </template>
 
@@ -58,13 +60,21 @@ export default {
         });
         this.registerdNickname = data.nickname;
         this.signupSuccess = true;
-        this.initForm();
       } catch (error) {
         console.log(error.response.data);
+      } finally {
+        this.initForm();
       }
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.modalAnimation-enter {
+  opacity: 0;
+}
+.modalAnimation-enter-active {
+  transition: opacity 0.5s;
+}
+</style>

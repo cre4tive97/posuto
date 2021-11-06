@@ -31,16 +31,13 @@ export default {
 <style>
 @import './css/reset.css';
 @import './css/style.css';
-.settingAnimation-enter {
+.settingAnimation-enter,
+.settingAnimation-leave-to {
   opacity: 0;
   transform: translateX(200px);
 }
 .settingAnimation-enter-active,
 .settingAnimation-leave-active {
   transition: all 0.5s;
-}
-.settingAnimation-leave-to {
-  opacity: 0;
-  transform: translateX(200px);
 }
 </style>

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/auth';
 import FormMixin from '@/mixins/FormMixin';
 export default {
   name: 'LoginForm',
@@ -32,12 +31,17 @@ export default {
   mixins: [FormMixin],
   methods: {
     async submitForm() {
-      const { data } = await loginUser({
-        username: this.username,
-        password: this.password,
-      });
-      console.log(data);
-      this.initForm();
+      try {
+        await this.$store.dispatch('LOGIN_USER', {
+          username: this.username,
+          password: this.password,
+        });
+        this.$router.push('/main');
+      } catch (error) {
+        console.log(error.response.data);
+      } finally {
+        this.initForm();
+      }
     },
   },
 };
