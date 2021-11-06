@@ -3,6 +3,12 @@
     <div class="form-box">
       <label for="username">Username</label>
       <input class="input" id="username" type="text" v-model="username" />
+      <p
+        style="color: red; position: relative"
+        v-if="!isUsernameValid && username !== ''"
+      >
+        이메일을 입력해주세요.
+      </p>
     </div>
     <div class="form-box">
       <label for="password">Password</label>
@@ -23,7 +29,8 @@
 
 <script>
 import { registerUser } from '@/api/auth';
-import { validateUsername } from '@/utils/validation';
+
+import FormMixin from '@/mixins/FormMixin';
 export default {
   name: 'SignUpForm',
   data() {
@@ -34,11 +41,7 @@ export default {
       nickname: '',
     };
   },
-  computed: {
-    isUsernameValid() {
-      return validateUsername(this.username);
-    },
-  },
+  mixins: [FormMixin],
   methods: {
     async submitForm() {
       try {
@@ -52,11 +55,6 @@ export default {
       } catch (error) {
         console.log(error.response.data);
       }
-    },
-    initForm() {
-      this.username = '';
-      this.password = '';
-      this.nickname = '';
     },
   },
 };

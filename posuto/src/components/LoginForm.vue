@@ -3,6 +3,12 @@
     <div class="form-box">
       <label for="username">Username</label>
       <input class="input" id="username" type="text" v-model="username" />
+      <p
+        style="color: red; position: relative"
+        v-if="!isUsernameValid && username !== ''"
+      >
+        이메일을 입력해주세요.
+      </p>
     </div>
     <div class="form-box">
       <label for="password">Password</label>
@@ -14,6 +20,7 @@
 
 <script>
 import { loginUser } from '@/api/auth';
+import FormMixin from '@/mixins/FormMixin';
 export default {
   name: 'LoginForm',
   data() {
@@ -22,6 +29,7 @@ export default {
       password: '',
     };
   },
+  mixins: [FormMixin],
   methods: {
     async submitForm() {
       const { data } = await loginUser({
@@ -29,6 +37,7 @@ export default {
         password: this.password,
       });
       console.log(data);
+      this.initForm();
     },
   },
 };
