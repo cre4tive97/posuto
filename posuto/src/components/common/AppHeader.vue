@@ -1,7 +1,11 @@
 <template>
   <div class="header">
     <router-link to="/main"><AppLogo /></router-link>
-    <div>
+    <div class="header__menu" v-if="islogin">
+      <div class="profile">{{ nickname }}</div>
+      <button @click="logout" class="link">Logout</button>
+    </div>
+    <div class="header__menu" v-else>
       <router-link to="/login">
         <button class="link">login</button>
       </router-link>
@@ -13,11 +17,27 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex';
 import AppLogo from '@/components/common/AppLogo.vue';
+import { deleteCookie } from '@/utils/cookies';
 export default {
   name: 'AppHeader',
   components: {
     AppLogo,
+  },
+  computed: {
+    ...mapState(['nickname']),
+    ...mapGetters(['islogin']),
+  },
+  methods: {
+    ...mapMutations(['clearToken', 'clearNickname']),
+    logout() {
+      this.clearToken();
+      this.clearNickname();
+      deleteCookie('posuto_user');
+      deleteCookie('posuto_auth');
+      this.$router.push('/login');
+    },
   },
 };
 </script>
@@ -39,11 +59,22 @@ export default {
   position: sticky;
   top: 0;
 }
+.header__menu {
+  display: flex;
+}
 .link {
   border: none;
   background: #88d9ea;
   padding: 4px 8px;
   margin-left: 8px;
   border-radius: 6px;
+}
+.profile {
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 4px 8px;
 }
 </style>
