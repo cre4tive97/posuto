@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <router-link to="/main"><AppLogo /></router-link>
-    <div class="header__menu" v-if="islogin">
+    <div class="header__menu" v-if="isLogin">
       <div class="profile">{{ nickname }}</div>
       <button @click="logout" class="link">Logout</button>
     </div>
@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     ...mapState(['nickname']),
-    ...mapGetters(['islogin']),
+    ...mapGetters(['isLogin']),
   },
   methods: {
     ...mapMutations(['clearToken', 'clearNickname']),
