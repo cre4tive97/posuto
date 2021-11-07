@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <PostListView />
+    <PostListView :postItems="postItems" />
   </div>
 </template>
 
@@ -12,9 +12,15 @@ export default {
   components: {
     PostListView,
   },
+  data() {
+    return {
+      postItems: [],
+    };
+  },
   methods: {
     async fetchPostData() {
       const { data } = await getPostData();
+      this.postItems = data.posts;
       console.log(data.posts);
     },
   },

@@ -6,6 +6,8 @@
       class="grid-stack-item"
       @mouseover="onMouseOver(i)"
       @mouseleave="onMouseLeave(i)"
+      @mousedown="onMouseDown"
+      @mouseup="onMouseUp"
       :gs-w="`${list.width}`"
       :gs-h="`${list.height}`"
       gs-min-w="3"
@@ -16,9 +18,11 @@
           <h1 ref="title">{{ list.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
+              v-if="!isEditing"
               class="far fa-edit"
               @click="editPost(list.title, list.content, i)"
             ></i>
+            <i v-else class="fas fa-edit" @click="isEditing = false"></i>
             <i class="far fa-trash-alt"></i>
           </div>
         </div>
@@ -55,6 +59,9 @@ export default {
       isEditing: false,
     };
   },
+  props: {
+    postItems: Array,
+  },
   mounted() {
     this.grid = GridStack.init({
       float: true,
@@ -76,6 +83,13 @@ export default {
     onMouseLeave(i) {
       this.$refs.btnGroup[i].classList.add('hidden');
     },
+    onMouseDown(e) {
+      console.log(e.target);
+      e.target.style.cursor = 'grabbing';
+    },
+    onMouseUp(e) {
+      e.target.style.cursor = 'grab';
+    },
     // addNewWidget() {
     //   const node = {
     //     w: 4,
@@ -84,14 +98,12 @@ export default {
     //   this.grid.addWidget(node);
     // },
     editPost(title, content, i) {
-      // const beforeTitle = title;
-      // const beforeContent = content;
-      // console.log(beforeTitle, beforeContent);
+      this.isEditing = true;
       this.$refs.title[i].innerHTML = `<form>
           <input class="titleInput" type="text" value="${title}" />
         </form>`;
-      this.$refs.content[i].innerHTML = `<form style="height: 100%; ">
-          <textarea class="contentTextarea" style="height: 70%;">${content}</textarea>
+      this.$refs.content[i].innerHTML = `<form style="height: 80%; ">
+          <textarea class="contentTextarea" style="height: 100%;">${content}</textarea>
         </form>`;
     },
   },
@@ -134,6 +146,13 @@ export default {
   overflow: auto;
   overflow-wrap: break-word;
 }
+.grid-stack-item-content:hover {
+  cursor: grab;
+}
+.grid-stack-item-content:focus {
+  cursor: grabbing;
+}
+
 .grid-stack-item-removing {
   opacity: 0.5;
 }
@@ -151,5 +170,13 @@ export default {
   font-family: 'Roboto';
   overflow: visible;
   width: 100%;
+}
+.contentTextarea:active,
+.contentTextarea:focus {
+  outline: none;
+}
+
+.hidden {
+  display: none;
 }
 </style>
