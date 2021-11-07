@@ -87,12 +87,11 @@ export default {
       // const beforeTitle = title;
       // const beforeContent = content;
       // console.log(beforeTitle, beforeContent);
-      console.log(this.$refs.title[i].innerHTML);
       this.$refs.title[i].innerHTML = `<form>
           <input class="titleInput" type="text" value="${title}" />
         </form>`;
-      this.$refs.content[i].innerHTML = `<form>
-          <textarea class="contentTextarea" rows="8" >${content}</textarea>
+      this.$refs.content[i].innerHTML = `<form style="height: 100%; ">
+          <textarea class="contentTextarea" style="height: 70%;">${content}</textarea>
         </form>`;
     },
   },
@@ -115,6 +114,9 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.post__btnGroup {
+  display: flex;
 }
 .post__btnGroup i {
   margin-left: 6px;
@@ -147,6 +149,7 @@ export default {
   font-size: 1rem;
   font-weight: 400;
   font-family: 'Roboto';
+  overflow: visible;
   width: 100%;
 }
 </style>
