@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "TIL API 문서",
+    "title": "Posuto",
     "description": "",
     "version": "1.0"
   },
@@ -157,6 +157,22 @@
             "name": "contents",
             "in": "formData",
             "description": "게시물 내용",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "position",
+            "in": "position",
+            "description": "게시물 위치",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Position"
+            }
+          },
+          {
+            "name": "color",
+            "in": "color",
+            "description": "게시물 배경 색",
             "required": true,
             "type": "string"
           }
@@ -369,6 +385,29 @@
         },
         "contents": {
           "type": "string"
+        },
+        "position": {
+          "type": "object"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "Position": {
+      "type": "object",
+      "properties": {
+        "gs-w": {
+          "type" : "number"
+        },
+        "gs-h": {
+          "type" : "number"
+        },
+        "gs-x" :{
+          "type" : "number"
+        },
+        "gs-y" :{
+          "type" : "number"
         }
       }
     }

@@ -13,14 +13,17 @@
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
-          <h1>{{ list.title }}</h1>
+          <h1 ref="title">{{ list.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
-            <i class="far fa-edit"></i>
+            <i
+              class="far fa-edit"
+              @click="editPost(list.title, list.content, i)"
+            ></i>
             <i class="far fa-trash-alt"></i>
           </div>
         </div>
         <hr />
-        <span>{{ list.content }}</span>
+        <span ref="content" class="post__content">{{ list.content }}</span>
       </div>
     </div>
   </section>
@@ -49,6 +52,7 @@ export default {
       height: 0,
       grid: undefined,
       count: 0,
+      isEditing: false,
     };
   },
   mounted() {
@@ -72,18 +76,33 @@ export default {
     onMouseLeave(i) {
       this.$refs.btnGroup[i].classList.add('hidden');
     },
-    addNewWidget() {
-      const node = {
-        w: 4,
-        h: 6,
-      };
-      this.grid.addWidget(node);
+    // addNewWidget() {
+    //   const node = {
+    //     w: 4,
+    //     h: 6,
+    //   };
+    //   this.grid.addWidget(node);
+    // },
+    editPost(title, content, i) {
+      // const beforeTitle = title;
+      // const beforeContent = content;
+      // console.log(beforeTitle, beforeContent);
+      console.log(this.$refs.title[i].innerHTML);
+      this.$refs.title[i].innerHTML = `<form>
+          <input class="titleInput" type="text" value="${title}" />
+        </form>`;
+      this.$refs.content[i].innerHTML = `<form>
+          <textarea class="contentTextarea" rows="8" >${content}</textarea>
+        </form>`;
     },
   },
 };
 </script>
 
 <style>
+.grid-stack {
+  background: #f5f5f6;
+}
 .post__header h1 {
   font-size: 1.25rem;
   font-weight: 400;
@@ -103,9 +122,6 @@ export default {
 .post__btnGroup i:hover {
   cursor: pointer;
 }
-.grid-stack {
-  background: #f5f5f6;
-}
 
 .grid-stack-item-content {
   background: pink;
@@ -118,5 +134,19 @@ export default {
 }
 .grid-stack-item-removing {
   opacity: 0.5;
+}
+.post__content:hover {
+  cursor: text;
+}
+
+.titleInput {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.contentTextarea {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: 'Roboto';
+  width: 100%;
 }
 </style>

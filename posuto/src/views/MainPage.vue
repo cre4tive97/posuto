@@ -1,17 +1,25 @@
 <template>
   <div class="main">
-    <!-- <BackgroundSizeBar /> -->
     <PostListView />
   </div>
 </template>
 
 <script>
-// import BackgroundSizeBar from '@/components/common/BackgroundSizeBar.vue';
 import PostListView from '@/components/PostListView.vue';
+import { getPostData } from '@/api/posts';
 export default {
+  name: 'MainPage',
   components: {
     PostListView,
-    // BackgroundSizeBar,
+  },
+  methods: {
+    async fetchPostData() {
+      const { data } = await getPostData();
+      console.log(data.posts);
+    },
+  },
+  created() {
+    this.fetchPostData();
   },
 };
 </script>

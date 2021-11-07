@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
 
+// const PositionSchema = new mongoose.Schema({
+//   'gs-w': String,
+//   'gs-h': String,
+//   'gs-x': String,
+//   'gs-y': String,
+// });
 const postSchema = new mongoose.Schema(
   {
     title: {
@@ -9,6 +15,13 @@ const postSchema = new mongoose.Schema(
       maxlength: 50,
     },
     contents: String,
+    position: {
+      'gs-w': Number,
+      'gs-h': Number,
+      'gs-x': Number,
+      'gs-y': Number,
+    },
+    color: String,
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Users',
