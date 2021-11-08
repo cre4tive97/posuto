@@ -170,11 +170,11 @@
             }
           },
           {
-            "name": "color",
-            "in": "color",
-            "description": "게시물 배경 색",
+            "name": "isEditing",
+            "in": "boolean",
+            "description": "수정중 상태",
             "required": true,
-            "type": "string"
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -396,20 +396,20 @@
     },
     "Position": {
       "type": "object",
-      "properties": {
-        "gs-w": {
+      "properties": [{
+        "width": {
           "type" : "number"
         },
-        "gs-h": {
+        "height": {
           "type" : "number"
         },
-        "gs-x" :{
+        "x" :{
           "type" : "number"
         },
-        "gs-y" :{
+        "y" :{
           "type" : "number"
         }
-      }
+      }]
     }
   },
   "security": [

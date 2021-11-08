@@ -1,39 +1,54 @@
 <template>
   <section class="grid-stack">
     <div
-      v-for="(list, i) in lists"
+      v-for="(postItem, i) in postItems"
       :key="i"
       class="grid-stack-item"
       @mouseover="onMouseOver(i)"
       @mouseleave="onMouseLeave(i)"
-      :gs-w="`${list.width}`"
-      :gs-h="`${list.height}`"
+      :gs-w="`${postItem.position[0].width}`"
+      :gs-h="`${postItem.position[0].height}`"
+      :gs-x="`${postItem.position[0].x}`"
+      :gs-y="`${postItem.position[0].y}`"
       gs-min-w="3"
       gs-min-h="5"
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
-          <form v-if="list.isEditing" class="post__form">
-            <input class="post__input" type="text" v-model="list.title" />
+          <form v-if="postItem.isEditing" class="post__form">
+            <input
+              class="post__input"
+              type="text"
+              :value="postItem.title"
+              @input="$emit('update:postItemTitle', $event.target.value)"
+            />
           </form>
-          <h1 v-else ref="title">{{ list.title }}</h1>
+          <h1 v-else ref="title">{{ postItem.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
-            <i v-if="list.isEditing" class="fas fa-edit"></i>
-            <i v-else @click="list.isEditing = true" class="far fa-edit"></i>
-
+            <i
+              v-if="postItem.isEditing"
+              @click="postItem.isEditing = false"
+              class="fas fa-edit"
+            ></i>
+            <i
+              v-else
+              @click="postItem.isEditing = true"
+              class="far fa-edit"
+            ></i>
             <i class="far fa-trash-alt"></i>
           </div>
         </div>
         <hr />
         <div class="content">
-          <form v-if="list.isEditing" class="post__form">
+          <form v-if="postItem.isEditing" class="post__form">
             <textarea
               class="post__textarea"
               style="height: 100%"
-              v-model="list.content"
+              :value="postItem.contents"
+              @input="$emit('update:postItemContents', $event.target.value)"
             ></textarea>
           </form>
-          <span v-else class="post__content"> {{ list.content }}</span>
+          <span v-else class="post__content"> {{ postItem.contents }}</span>
         </div>
       </div>
     </div>
@@ -48,30 +63,6 @@ import 'gridstack/dist/h5/gridstack-dd-native';
 export default {
   data() {
     return {
-      lists: [
-        {
-          title: 'a',
-          content: 'adsfadf',
-          width: 4,
-          height: 6,
-          isEditing: false,
-        },
-        {
-          title: 'b',
-          content:
-            'adsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadf',
-          width: 4,
-          height: 6,
-          isEditing: false,
-        },
-        {
-          title: 'c',
-          content: 'adsfadf',
-          width: 4,
-          height: 6,
-          isEditing: false,
-        },
-      ],
       width: 0,
       height: 0,
       grid: undefined,
@@ -80,20 +71,10 @@ export default {
   },
   props: {
     postItems: Array,
+    loadingStatus: Boolean,
   },
-  mounted() {
-    this.grid = GridStack.init({
-      float: true,
-      cellHeight: '50px',
-      minRow: 13,
-      resizable: {
-        handles: 'e,se,s,sw,w',
-      },
-      alwaysShowResizeHandle:
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent,
-        ),
-    });
+  updated() {
+    this.setGrid();
   },
   methods: {
     onMouseOver(i) {
@@ -102,29 +83,20 @@ export default {
     onMouseLeave(i) {
       this.$refs.btnGroup[i].classList.add('hidden');
     },
-    // addNewWidget() {
-    //   const node = {
-    //     w: 4,
-    //     h: 6,
-    //   };
-    //   this.grid.addWidget(node);
-    // },
-    // editPost(title, content, i) {
-    //   this.isEditing = true;
-    //   this.editingTitle = title;
-    //   this.editingContent = content;
-    //   this.$refs.title[i].innerHTML = `<form>
-    //       <input class="titleInput" type="text" value="${this.editingTitle}" v-model="editingTitle"/>
-    //     </form>`;
-    //   this.$refs.content[i].innerHTML = `<form style="height: 80%; ">
-    //       <textarea class="contentTextarea" style="height: 100%;">${this.editingContent}</textarea>
-    //     </form>`;
-    // },
-    // savePost(i) {
-    //   this.isEditing = false;
-    //   this.$refs.title[i].innerHTML = this.editingTitle;
-    //   this.$refs.content[i].innerHTML = this.editingContent;
-    // },
+    setGrid() {
+      this.grid = GridStack.init({
+        float: true,
+        cellHeight: '50px',
+        minRow: 13,
+        resizable: {
+          handles: 'e,se,s,w',
+        },
+        alwaysShowResizeHandle:
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent,
+          ),
+      });
+    },
   },
 };
 </script>

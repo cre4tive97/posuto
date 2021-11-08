@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <PostListView :postItems="postItems" />
+    <PostListView :postItems="postItems" :loadingStatus="loadingStatus" />
   </div>
 </template>
 
@@ -15,13 +15,14 @@ export default {
   data() {
     return {
       postItems: [],
+      loadingStatus: false,
     };
   },
   methods: {
     async fetchPostData() {
       const { data } = await getPostData();
       this.postItems = data.posts;
-      console.log(data.posts);
+      this.loadingStatus = true;
     },
   },
   created() {
