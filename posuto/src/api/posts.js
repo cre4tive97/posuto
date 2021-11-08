@@ -5,4 +5,8 @@ function getPostData() {
   return posts.get('/');
 }
 
-export { getPostData };
+function addPostData(postData) {
+  return posts.post('/', postData);
+}
+
+export { getPostData, addPostData };

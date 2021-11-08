@@ -20,6 +20,7 @@
               class="post__input"
               type="text"
               :value="postItem.title"
+              placeholder="제목을 입력하세요"
               @input="$emit('update:postItemTitle', $event.target.value)"
             />
           </form>
@@ -45,6 +46,7 @@
               class="post__textarea"
               style="height: 100%"
               :value="postItem.contents"
+              placeholder="내용을 입력하세요"
               @input="$emit('update:postItemContents', $event.target.value)"
             ></textarea>
           </form>
@@ -145,6 +147,7 @@ export default {
 }
 .content {
   height: 75%;
+  font-weight: 400;
 }
 .post__input {
   font-size: 1.2rem;
