@@ -6,8 +6,6 @@
       class="grid-stack-item"
       @mouseover="onMouseOver(i)"
       @mouseleave="onMouseLeave(i)"
-      @mousedown="onMouseDown"
-      @mouseup="onMouseUp"
       :gs-w="`${list.width}`"
       :gs-h="`${list.height}`"
       gs-min-w="3"
@@ -15,19 +13,27 @@
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
-          <h1 ref="title">{{ list.title }}</h1>
+          <form v-if="isEditing">
+            <input class="titleInput" type="text" v-model="editingTitle" />
+          </form>
+          <h1 v-else ref="title">{{ list.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
               v-if="!isEditing"
+              @click="isEditing = true"
               class="far fa-edit"
-              @click="editPost(list.title, list.content, i)"
             ></i>
-            <i v-else class="fas fa-edit" @click="isEditing = false"></i>
+            <i v-else class="fas fa-edit"></i>
             <i class="far fa-trash-alt"></i>
           </div>
         </div>
         <hr />
-        <span ref="content" class="post__content">{{ list.content }}</span>
+        <div ref="content">
+          <form v-if="isEditing" style="height: 80%">
+            <textarea class="contentTextarea" style="height: 100%"></textarea>
+          </form>
+          <span v-else class="post__content"> {{ list.content }}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -57,6 +63,8 @@ export default {
       grid: undefined,
       count: 0,
       isEditing: false,
+      editingTitle: '',
+      editingContent: '',
     };
   },
   props: {
@@ -83,13 +91,6 @@ export default {
     onMouseLeave(i) {
       this.$refs.btnGroup[i].classList.add('hidden');
     },
-    onMouseDown(e) {
-      console.log(e.target);
-      e.target.style.cursor = 'grabbing';
-    },
-    onMouseUp(e) {
-      e.target.style.cursor = 'grab';
-    },
     // addNewWidget() {
     //   const node = {
     //     w: 4,
@@ -97,15 +98,22 @@ export default {
     //   };
     //   this.grid.addWidget(node);
     // },
-    editPost(title, content, i) {
-      this.isEditing = true;
-      this.$refs.title[i].innerHTML = `<form>
-          <input class="titleInput" type="text" value="${title}" />
-        </form>`;
-      this.$refs.content[i].innerHTML = `<form style="height: 80%; ">
-          <textarea class="contentTextarea" style="height: 100%;">${content}</textarea>
-        </form>`;
-    },
+    // editPost(title, content, i) {
+    //   this.isEditing = true;
+    //   this.editingTitle = title;
+    //   this.editingContent = content;
+    //   this.$refs.title[i].innerHTML = `<form>
+    //       <input class="titleInput" type="text" value="${this.editingTitle}" v-model="editingTitle"/>
+    //     </form>`;
+    //   this.$refs.content[i].innerHTML = `<form style="height: 80%; ">
+    //       <textarea class="contentTextarea" style="height: 100%;">${this.editingContent}</textarea>
+    //     </form>`;
+    // },
+    // savePost(i) {
+    //   this.isEditing = false;
+    //   this.$refs.title[i].innerHTML = this.editingTitle;
+    //   this.$refs.content[i].innerHTML = this.editingContent;
+    // },
   },
 };
 </script>
@@ -149,15 +157,8 @@ export default {
 .grid-stack-item-content:hover {
   cursor: grab;
 }
-.grid-stack-item-content:focus {
-  cursor: grabbing;
-}
-
 .grid-stack-item-removing {
   opacity: 0.5;
-}
-.post__content:hover {
-  cursor: text;
 }
 
 .titleInput {
@@ -172,8 +173,11 @@ export default {
   width: 100%;
 }
 .contentTextarea:active,
-.contentTextarea:focus {
+.contentTextarea:focus,
+.titleInput:focus,
+.titleInput:active {
   outline: none;
+  cursor: text;
 }
 
 .hidden {

@@ -13,8 +13,6 @@ router.post('/', async (req, res) => {
       createdBy: req.user._id,
     });
     res.status(201).json({ data: doc });
-    console.log(doc);
-    console.log(...req.body);
   } catch (error) {
     console.log(error);
     if (error.code === 11000) {
