@@ -71,7 +71,6 @@ export default {
   },
   props: {
     postItems: Array,
-    loadingStatus: Boolean,
   },
   updated() {
     this.setGrid();
@@ -117,6 +116,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .post__btnGroup {
   display: flex;
@@ -144,11 +144,12 @@ export default {
   opacity: 0.5;
 }
 .content {
-  height: 80%;
+  height: 75%;
 }
 .post__input {
   font-size: 1.2rem;
   font-weight: 400;
+  width: 100%;
 }
 
 .post__textarea:active,
