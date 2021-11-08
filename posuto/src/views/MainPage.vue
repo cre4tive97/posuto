@@ -1,6 +1,11 @@
 <template>
   <div class="main">
-    <PostListView :postItems="postItems" @deletePost="deletePost" />
+    <PostListView
+      :postItems="postItems"
+      @deletePost="deletePost"
+      @startEditing="startEditing"
+      @finishEditing="finishEditing"
+    />
     <transition name="settingAnimation">
       <AppSetting v-if="settingState" />
     </transition>
@@ -16,7 +21,12 @@
 <script>
 import AppSetting from '@/components/common/AppSetting.vue';
 import PostListView from '@/components/PostListView.vue';
-import { getPostData, addPostData, deletePostData } from '@/api/posts';
+import {
+  getPostData,
+  addPostData,
+  deletePostData,
+  updatePostData,
+} from '@/api/posts';
 export default {
   name: 'MainPage',
   components: {
@@ -74,6 +84,12 @@ export default {
           );
         }
       }
+    },
+    startEditing(i) {
+      this.postItems[i].isEditing = false;
+    },
+    async finishEditing(i) {
+      this.postItems[i].isEditing = true;
     },
   },
 };

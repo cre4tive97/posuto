@@ -15,25 +15,24 @@
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
-          <form v-if="postItem.isEditing" class="post__form">
+          <form @submit.prevent v-if="postItem.isEditing" class="post__form">
             <input
               class="post__input"
               type="text"
-              :value="postItem.title"
               placeholder="제목을 입력하세요"
-              @input="$emit('update:postItemTitle', $event.target.value)"
+              :value="postItem.title"
             />
           </form>
           <h1 v-else ref="title">{{ postItem.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
               v-if="postItem.isEditing"
-              @click="postItem.isEditing = false"
+              @click="$emit('startEditing', i)"
               class="fas fa-edit"
             ></i>
             <i
               v-else
-              @click="postItem.isEditing = true"
+              @click="$emit('finishEditing', i, postItem)"
               class="far fa-edit"
             ></i>
             <i
@@ -44,7 +43,7 @@
         </div>
         <hr />
         <div class="content">
-          <form v-if="postItem.isEditing" class="post__form">
+          <form @submit.prevent v-if="postItem.isEditing" class="post__form">
             <textarea
               class="post__textarea"
               style="height: 100%"
@@ -69,6 +68,8 @@ export default {
   data() {
     return {
       grid: undefined,
+      currentEditingTitle: '',
+      currentEditingContents: '',
     };
   },
   props: {
@@ -97,6 +98,13 @@ export default {
             navigator.userAgent,
           ),
       });
+    },
+    emitEditPost() {
+      this.$emit('editPost');
+    },
+    editPostTitle(e) {
+      console.log(e.value);
+      e.value = this.currentEditingTitle;
     },
   },
 };

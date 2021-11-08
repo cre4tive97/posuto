@@ -1,18 +1,18 @@
 import { posts } from '@/api/index';
 
-// 게시물 조회
+// 포스트 조회
 function getPostData() {
   return posts.get('/');
 }
-
+// 포스트 추가
 function addPostData(postData) {
   return posts.post('/', postData);
 }
-
+// 포스트 수정
 function updatePostData(postId, postData) {
   return posts.post(postId, postData);
 }
-
+// 포스트 삭제
 function deletePostData(postId) {
   return posts.delete(`/${postId}`);
 }
