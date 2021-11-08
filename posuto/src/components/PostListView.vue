@@ -13,24 +13,25 @@
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
-          <form v-if="isEditing">
-            <input class="titleInput" type="text" v-model="editingTitle" />
+          <form v-if="list.isEditing" class="post__form">
+            <input class="post__input" type="text" v-model="list.title" />
           </form>
           <h1 v-else ref="title">{{ list.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
-            <i
-              v-if="!isEditing"
-              @click="isEditing = true"
-              class="far fa-edit"
-            ></i>
-            <i v-else class="fas fa-edit"></i>
+            <i v-if="list.isEditing" class="fas fa-edit"></i>
+            <i v-else @click="list.isEditing = true" class="far fa-edit"></i>
+
             <i class="far fa-trash-alt"></i>
           </div>
         </div>
         <hr />
-        <div ref="content">
-          <form v-if="isEditing" style="height: 80%">
-            <textarea class="contentTextarea" style="height: 100%"></textarea>
+        <div class="content">
+          <form v-if="list.isEditing" class="post__form">
+            <textarea
+              class="post__textarea"
+              style="height: 100%"
+              v-model="list.content"
+            ></textarea>
           </form>
           <span v-else class="post__content"> {{ list.content }}</span>
         </div>
@@ -48,23 +49,33 @@ export default {
   data() {
     return {
       lists: [
-        { title: 'a', content: 'adsfadf', width: 4, height: 6 },
+        {
+          title: 'a',
+          content: 'adsfadf',
+          width: 4,
+          height: 6,
+          isEditing: false,
+        },
         {
           title: 'b',
           content:
             'adsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadfadsfadf',
           width: 4,
           height: 6,
+          isEditing: false,
         },
-        { title: 'c', content: 'adsfadf', width: 4, height: 6 },
+        {
+          title: 'c',
+          content: 'adsfadf',
+          width: 4,
+          height: 6,
+          isEditing: false,
+        },
       ],
       width: 0,
       height: 0,
       grid: undefined,
       count: 0,
-      isEditing: false,
-      editingTitle: '',
-      editingContent: '',
     };
   },
   props: {
@@ -118,7 +129,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .grid-stack {
   background: #f5f5f6;
 }
@@ -160,27 +171,34 @@ export default {
 .grid-stack-item-removing {
   opacity: 0.5;
 }
-
-.titleInput {
+.content {
+  height: 80%;
+}
+.post__input {
   font-size: 1.2rem;
   font-weight: 400;
 }
-.contentTextarea {
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: 'Roboto';
-  overflow: visible;
-  width: 100%;
-}
-.contentTextarea:active,
-.contentTextarea:focus,
-.titleInput:focus,
-.titleInput:active {
+
+.post__textarea:active,
+.post__textarea:focus,
+.post__input:focus,
+.post__input:active {
   outline: none;
   cursor: text;
 }
 
 .hidden {
   display: none;
+}
+.post__form {
+  height: 80%;
+}
+.post__textarea {
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: 'Roboto';
+  overflow: visible;
+  width: 100%;
 }
 </style>
