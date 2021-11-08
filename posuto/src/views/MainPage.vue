@@ -55,7 +55,7 @@ export default {
           alert('새로운 포스트가 이미 존재합니다.');
         } else if (error.response.status === 500) {
           alert(
-            '서버에 문제가 있어 게시물을 생성하지 못했습니다. 잠시 후 다시 시도해주세요.',
+            '서버에 문제가 있어 포스트를 생성하지 못했습니다. 잠시 후 다시 시도해주세요.',
           );
         }
       }
@@ -64,7 +64,15 @@ export default {
       try {
         await deletePostData(postId);
       } catch (error) {
-        console.log(error.response);
+        if (error.response.status === 400) {
+          alert('포스트를 삭제할 수 없습니다.');
+        } else if (error.response.status === 404) {
+          alert('포스트를 찾을 수 없습니다.');
+        } else if (error.response.status === 500) {
+          alert(
+            '서버에 문제가 있어 포스트를 삭제하지 못했습니다. 잠시 후 다시 시도해주세요.',
+          );
+        }
       }
     },
   },
