@@ -36,7 +36,10 @@
               @click="postItem.isEditing = true"
               class="far fa-edit"
             ></i>
-            <i class="far fa-trash-alt"></i>
+            <i
+              class="far fa-trash-alt"
+              @click="$emit('deletePost', postItem._id)"
+            ></i>
           </div>
         </div>
         <hr />
@@ -65,10 +68,7 @@ import 'gridstack/dist/h5/gridstack-dd-native';
 export default {
   data() {
     return {
-      width: 0,
-      height: 0,
       grid: undefined,
-      count: 0,
     };
   },
   props: {

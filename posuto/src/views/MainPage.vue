@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <PostListView :postItems="postItems" />
+    <PostListView :postItems="postItems" @deletePost="deletePost" />
     <transition name="settingAnimation">
       <AppSetting v-if="settingState" />
     </transition>
@@ -16,7 +16,7 @@
 <script>
 import AppSetting from '@/components/common/AppSetting.vue';
 import PostListView from '@/components/PostListView.vue';
-import { getPostData, addPostData } from '@/api/posts';
+import { getPostData, addPostData, deletePostData } from '@/api/posts';
 export default {
   name: 'MainPage',
   components: {
@@ -34,17 +34,38 @@ export default {
   },
   methods: {
     async fetchPostData() {
-      const { data } = await getPostData();
-      this.postItems = data.posts;
+      try {
+        const { data } = await getPostData();
+        this.postItems = data.posts;
+      } catch (error) {
+        console.log(error.response.data);
+      }
     },
     async createNewPost() {
-      const response = await addPostData({
-        title: '',
-        contents: '',
-        position: [{ width: '3', height: '3', x: '0', y: '0' }],
-        isEditing: true,
-      });
-      return response;
+      try {
+        await addPostData({
+          title: '',
+          contents: '',
+          position: [{ width: '3', height: '3', x: '0', y: '0' }],
+          isEditing: true,
+        });
+      } catch (error) {
+        console.log(error.response);
+        if (error.response.status === 400) {
+          alert('새로운 포스트가 이미 존재합니다.');
+        } else if (error.response.status === 500) {
+          alert(
+            '서버에 문제가 있어 게시물을 생성하지 못했습니다. 잠시 후 다시 시도해주세요.',
+          );
+        }
+      }
+    },
+    async deletePost(postId) {
+      try {
+        await deletePostData(postId);
+      } catch (error) {
+        console.log(error.response);
+      }
     },
   },
 };

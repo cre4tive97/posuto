@@ -9,4 +9,12 @@ function addPostData(postData) {
   return posts.post('/', postData);
 }
 
-export { getPostData, addPostData };
+function updatePostData(postId, postData) {
+  return posts.post(postId, postData);
+}
+
+function deletePostData(postId) {
+  return posts.delete(`/${postId}`);
+}
+
+export { getPostData, addPostData, updatePostData, deletePostData };
