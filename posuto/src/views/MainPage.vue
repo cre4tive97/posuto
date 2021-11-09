@@ -90,10 +90,15 @@ export default {
     startEditing(i) {
       this.postItems[i].isEditing = true;
     },
-    async finishEditing(id, postData) {
+    async finishEditing(postItem, postData) {
+      const id = postItem._id;
       try {
-        if (!postData.title || !postData.contents) {
-          alert('제목, 내용을 수정해주세요');
+        if (postData.title === '') {
+          postData.title = postItem.title;
+          await updatePostData(id, postData);
+        } else if (postData.contents === '') {
+          postData.contents = postItem.contents;
+          this.fetchPostData();
         } else {
           await updatePostData(id, postData);
           this.fetchPostData();

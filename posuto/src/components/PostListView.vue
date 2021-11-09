@@ -29,7 +29,7 @@
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
               v-if="postItem.isEditing"
-              @click="emitFinishEditing(i, postItem._id)"
+              @click="emitFinishEditing(i, postItem)"
               class="fas fa-edit"
             ></i>
             <i v-else @click="$emit('startEditing', i)" class="far fa-edit"></i>
@@ -118,7 +118,7 @@ export default {
         this.currentEditingContents = e.target.value;
       }
     },
-    emitFinishEditing(i, postId) {
+    emitFinishEditing(i, postItem) {
       const postData = {
         title: this.currentEditingTitle,
         contents: this.currentEditingContents,
@@ -130,7 +130,7 @@ export default {
         },
         isEditing: false,
       };
-      this.$emit('finishEditing', postId, postData);
+      this.$emit('finishEditing', postItem, postData);
     },
   },
 };
