@@ -88,10 +88,8 @@ export default {
     startEditing(i) {
       this.postItems[i].isEditing = true;
     },
-    async finishEditing(i, postData) {
-      this.postItems[i].isEditing = false;
-      const response = await updatePostData(postData._id, postData);
-      console.log(response);
+    async finishEditing(id, postData) {
+      await updatePostData(id, postData);
     },
   },
 };
