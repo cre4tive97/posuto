@@ -59,6 +59,7 @@ export default {
           position: [{ width: '3', height: '3', x: '0', y: '0' }],
           isEditing: true,
         });
+        this.fetchPostData();
       } catch (error) {
         console.log(error.response);
         if (error.response.status === 400) {
@@ -73,6 +74,7 @@ export default {
     async deletePost(postId) {
       try {
         await deletePostData(postId);
+        this.fetchPostData();
       } catch (error) {
         if (error.response.status === 400) {
           alert('포스트를 삭제할 수 없습니다.');
@@ -89,10 +91,23 @@ export default {
       this.postItems[i].isEditing = true;
     },
     async finishEditing(id, postData) {
-      if (!postData.title || !postData.contents) {
-        alert('수정 해주세요');
-      } else {
-        await updatePostData(id, postData);
+      try {
+        if (!postData.title || !postData.contents) {
+          alert('제목, 내용을 수정해주세요');
+        } else {
+          await updatePostData(id, postData);
+          this.fetchPostData();
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          alert('이미 같은 포스트가 존재합니다.');
+        } else if (error.response.status === 404) {
+          alert('포스트를 찾을 수 없습니다.');
+        } else if (error.response.status === 500) {
+          alert(
+            '서버에 문제가 있어 포스트를 수정하지 못했습니다. 잠시 후 다시 시도해주세요.',
+          );
+        }
       }
     },
   },
