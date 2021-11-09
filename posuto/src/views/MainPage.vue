@@ -96,8 +96,10 @@ export default {
         if (postData.title === '') {
           postData.title = postItem.title;
           await updatePostData(id, postData);
+          this.fetchPostData();
         } else if (postData.contents === '') {
           postData.contents = postItem.contents;
+          await updatePostData(id, postData);
           this.fetchPostData();
         } else {
           await updatePostData(id, postData);
