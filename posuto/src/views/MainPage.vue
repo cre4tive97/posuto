@@ -89,7 +89,11 @@ export default {
       this.postItems[i].isEditing = true;
     },
     async finishEditing(id, postData) {
-      await updatePostData(id, postData);
+      if (!postData.title || !postData.contents) {
+        alert('수정 해주세요');
+      } else {
+        await updatePostData(id, postData);
+      }
     },
   },
 };
