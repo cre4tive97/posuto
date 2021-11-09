@@ -10,7 +10,7 @@ function addPostData(postData) {
 }
 // 포스트 수정
 function updatePostData(postId, postData) {
-  return posts.post(postId, postData);
+  return posts.put(`/${postId}`, postData);
 }
 // 포스트 삭제
 function deletePostData(postId) {

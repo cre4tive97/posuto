@@ -2,6 +2,7 @@
   <section class="grid-stack">
     <div
       v-for="(postItem, i) in postItems"
+      ref="item"
       :key="i"
       class="grid-stack-item"
       @mouseover="onMouseOver(i)"
@@ -21,20 +22,17 @@
               type="text"
               placeholder="제목을 입력하세요"
               :value="postItem.title"
+              @input="matchTitle($event, i)"
             />
           </form>
           <h1 v-else ref="title">{{ postItem.title }}</h1>
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
               v-if="postItem.isEditing"
-              @click="$emit('startEditing', i)"
+              @click="emitFinishEditing(i, postItem)"
               class="fas fa-edit"
             ></i>
-            <i
-              v-else
-              @click="$emit('finishEditing', i, postItem)"
-              class="far fa-edit"
-            ></i>
+            <i v-else @click="$emit('startEditing', i)" class="far fa-edit"></i>
             <i
               class="far fa-trash-alt"
               @click="$emit('deletePost', postItem._id)"
@@ -49,7 +47,7 @@
               style="height: 100%"
               :value="postItem.contents"
               placeholder="내용을 입력하세요"
-              @input="$emit('update:postItemContents', $event.target.value)"
+              @input="matchContents($event, i)"
             ></textarea>
           </form>
           <span v-else class="post__content"> {{ postItem.contents }}</span>
@@ -105,6 +103,36 @@ export default {
     editPostTitle(e) {
       console.log(e.value);
       e.value = this.currentEditingTitle;
+    },
+    matchTitle(e, i) {
+      if (e.target.value === this.postItems[i].title) {
+        this.currentEditingTitle = this.postItems[i].title;
+      } else {
+        this.currentEditingTitle = e.target.value;
+      }
+    },
+    matchContents(e, i) {
+      if (e.target.value === this.postItems[i].contents) {
+        this.currentEditingContents = this.postItems[i].contents;
+      } else {
+        this.currentEditingContents = e.target.value;
+      }
+    },
+    emitFinishEditing(i, postItem) {
+      const postData = {
+        _id: postItem.id,
+        title: this.currentEditingTitle,
+        contents: this.currentEditingContents,
+        position: {
+          width: this.$refs.item[i].getAttribute('gs-w'),
+          height: this.$refs.item[i].getAttribute('gs-h'),
+          x: this.$refs.item[i].getAttribute('gs-x'),
+          y: this.$refs.item[i].getAttribute('gs-y'),
+        },
+        isEditing: false,
+      };
+      console.log();
+      this.$emit('finishEditing', i, postData);
     },
   },
 };
