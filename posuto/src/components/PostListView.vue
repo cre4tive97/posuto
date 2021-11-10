@@ -58,9 +58,7 @@
 </template>
 
 <script>
-import 'gridstack/dist/gridstack.min.css';
-import { GridStack } from 'gridstack';
-import 'gridstack/dist/h5/gridstack-dd-native';
+import { setGrid } from '@/utils/grid';
 
 export default {
   data() {
@@ -74,7 +72,7 @@ export default {
     postItems: Array,
   },
   updated() {
-    this.setGrid();
+    setGrid();
   },
   methods: {
     onMouseOver(i) {
@@ -82,20 +80,6 @@ export default {
     },
     onMouseLeave(i) {
       this.$refs.btnGroup[i].classList.add('hidden');
-    },
-    setGrid() {
-      this.grid = GridStack.init({
-        float: true,
-        cellHeight: '50px',
-        minRow: 13,
-        resizable: {
-          handles: 'e,se,s,w',
-        },
-        alwaysShowResizeHandle:
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent,
-          ),
-      });
     },
     emitEditPost() {
       this.$emit('editPost');

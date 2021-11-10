@@ -37,6 +37,7 @@ export default {
     return {
       postItems: [],
       settingState: false,
+      updateStatus: false,
     };
   },
   created() {
@@ -45,20 +46,26 @@ export default {
   methods: {
     async fetchPostData() {
       try {
+        // 포스트 데이터 불러오기
         const { data } = await getPostData();
         this.postItems = data.posts;
       } catch (error) {
-        console.log(error.response.data);
+        // 권한 에러 뜰 경우 login페이지로 이동
+        if (error.response.status === 401) {
+          this.$router.push('/login');
+        }
       }
     },
     async createNewPost() {
       try {
+        // 디폴트 포스트를 생성
         await addPostData({
           title: '',
           contents: '',
           position: [{ width: '3', height: '3', x: '0', y: '0' }],
           isEditing: true,
         });
+        // Refresh
         this.fetchPostData();
       } catch (error) {
         console.log(error.response);
@@ -117,7 +124,7 @@ export default {
           await updatePostData(id, postData);
           this.fetchPostData();
         }
-        // switch문으로 바꿀 수 없을까?
+        // switch문 적용 가능?
       } catch (error) {
         if (error.response.status === 400) {
           alert('이미 같은 포스트가 존재합니다.');
