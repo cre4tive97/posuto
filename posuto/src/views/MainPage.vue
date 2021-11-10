@@ -92,19 +92,15 @@ export default {
     },
     async finishEditing(postItem, postData) {
       const id = postItem._id;
+      console.log(postItem.title);
+      console.log(postData.title);
       try {
-        if (postData.title === '') {
-          postData.title = postItem.title;
-          await updatePostData(id, postData);
-          this.fetchPostData();
-        } else if (postData.contents === '') {
-          postData.contents = postItem.contents;
-          await updatePostData(id, postData);
-          this.fetchPostData();
-        } else {
-          await updatePostData(id, postData);
-          this.fetchPostData();
-        }
+        // switch ((postData.title, postData.contents)) {
+        //   case()
+        //   default:
+        await updatePostData(id, postData);
+        this.fetchPostData();
+        // }
       } catch (error) {
         if (error.response.status === 400) {
           alert('이미 같은 포스트가 존재합니다.');

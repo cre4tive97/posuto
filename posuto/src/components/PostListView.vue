@@ -22,7 +22,7 @@
               type="text"
               placeholder="제목을 입력하세요"
               :value="postItem.title"
-              @input="matchTitle($event, i)"
+              @input="matchTitle"
             />
           </form>
           <h1 v-else ref="title">{{ postItem.title }}</h1>
@@ -47,7 +47,7 @@
               style="height: 100%"
               :value="postItem.contents"
               placeholder="내용을 입력하세요"
-              @input="matchContents($event, i)"
+              @input="matchContents"
             ></textarea>
           </form>
           <span v-else class="post__content"> {{ postItem.contents }}</span>
@@ -104,21 +104,13 @@ export default {
       console.log(e.value);
       e.value = this.currentEditingTitle;
     },
-    matchTitle(e, i) {
-      if (e.target.value === this.postItems[i].title) {
-        this.currentEditingTitle = this.postItems[i].title;
-      } else {
-        this.currentEditingTitle = e.target.value;
-      }
+    matchTitle(e) {
+      this.currentEditingTitle = e.target.value;
     },
-    matchContents(e, i) {
-      if (e.target.value === this.postItems[i].contents) {
-        this.currentEditingContents = this.postItems[i].contents;
-      } else {
-        this.currentEditingContents = e.target.value;
-      }
+    matchContents(e) {
+      this.currentEditingContents = e.target.value;
     },
-    emitFinishEditing(i, postItem) {
+    async emitFinishEditing(i, postItem) {
       const postData = {
         title: this.currentEditingTitle,
         contents: this.currentEditingContents,
@@ -130,7 +122,9 @@ export default {
         },
         isEditing: false,
       };
-      this.$emit('finishEditing', postItem, postData);
+      await this.$emit('finishEditing', postItem, postData);
+      this.currentEditingTitle = '';
+      this.currentEditingContents = '';
     },
   },
 };
