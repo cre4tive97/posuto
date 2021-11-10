@@ -92,15 +92,33 @@ export default {
     },
     async finishEditing(postItem, postData) {
       const id = postItem._id;
-      console.log(postItem.title);
-      console.log(postData.title);
       try {
-        // switch ((postData.title, postData.contents)) {
-        //   case()
-        //   default:
-        await updatePostData(id, postData);
-        this.fetchPostData();
-        // }
+        // 기존 제목과 컨텐츠 변경이 없을경우
+        if (postData.title === '' && postData.contents === '') {
+          console.log(1);
+          postData.title = postItem.title;
+          postData.contents = postItem.contents;
+          await updatePostData(id, postData);
+          this.fetchPostData();
+          // 기존 컨텐츠만 변경되었을 경우
+        } else if (postData.title === '' && postData.contents !== '') {
+          console.log(2);
+          postData.title = postItem.title;
+          await updatePostData(id, postData);
+          this.fetchPostData();
+          // 기존 제목만 변경되었을 경우
+        } else if (postData.title !== '' && postData.contents === '') {
+          console.log(3);
+          postData.contents = postItem.contents;
+          await updatePostData(id, postData);
+          this.fetchPostData();
+          // 기존 제목과 컨텐츠 모두 변경되었을 경우
+        } else if (postData.title !== '' && postData.contents !== '') {
+          console.log(4);
+          await updatePostData(id, postData);
+          this.fetchPostData();
+        }
+        // switch문으로 바꿀 수 없을까?
       } catch (error) {
         if (error.response.status === 400) {
           alert('이미 같은 포스트가 존재합니다.');
