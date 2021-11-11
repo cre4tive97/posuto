@@ -66,19 +66,22 @@ export default {
       grid: undefined,
       currentEditingTitle: '',
       currentEditingContents: '',
+      currentPosition: [],
     };
   },
   props: {
     postItems: Array,
   },
+
   updated() {
+    // if (this.currentPosition.length === 0) {
+    //   this.postItems.forEach(item => {
+    //     this.currentPosition.push(item.position[0]);
+    //   });
+    // }
+    this.setCurrentPositionValue();
     setGrid(this.grid);
   },
-  // watch: {
-  //   postItems: () => {
-  //     setGrid(this.grid);
-  //   },
-  // },
   methods: {
     onMouseOver(i) {
       this.$refs.btnGroup[i].classList.remove('hidden');
@@ -114,6 +117,17 @@ export default {
       await this.$emit('finishEditing', postItem, postData);
       this.currentEditingTitle = '';
       this.currentEditingContents = '';
+    },
+    setCurrentPositionValue() {
+      this.$refs.item.forEach(item => {
+        this.currentPosition.push({
+          width: item.getAttribute('gs-w'),
+          height: item.getAttribute('gs-h'),
+          x: item.getAttribute('gs-x'),
+          y: item.getAttribute('gs-y'),
+        });
+      });
+      console.log(this.currentPosition);
     },
   },
 };

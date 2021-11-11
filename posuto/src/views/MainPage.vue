@@ -5,7 +5,6 @@
       @deletePost="deletePost"
       @startEditing="startEditing"
       @finishEditing="finishEditing"
-      :key="conponentKey"
     />
     <transition name="settingAnimation">
       <AppSetting v-if="settingState" />
@@ -43,7 +42,6 @@ export default {
       postItems: [],
       settingState: false,
       updateStatus: false,
-      conponentKey: 0,
     };
   },
   created() {
@@ -73,7 +71,7 @@ export default {
         });
         // Refresh
         await this.fetchPostData();
-        this.componentKey++;
+        this.$router.go();
       } catch (error) {
         if (error.response.status === 400) {
           alert('새로운 포스트가 이미 존재합니다.');
