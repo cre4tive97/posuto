@@ -5,6 +5,7 @@
       @deletePost="deletePost"
       @startEditing="startEditing"
       @finishEditing="finishEditing"
+      @move:position="savePosition"
     />
     <transition name="settingAnimation">
       <AppSetting v-if="settingState" />
@@ -12,7 +13,7 @@
     <button class="add__btn" @click="createNewPost">
       <i class="far fa-sticky-note"></i>
     </button>
-    <button class="save__btn" @click="positionSave">
+    <button class="save__btn">
       <i class="far fa-save"></i>
     </button>
     <button class="setting__btn" @click="settingState = !settingState">
@@ -144,7 +145,8 @@ export default {
         }
       }
     },
-    positionSave() {},
+    // 포지션 변경시 전체 포스트 위치 저장
+    savePosition() {},
   },
 };
 </script>

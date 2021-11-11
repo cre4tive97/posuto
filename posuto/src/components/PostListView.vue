@@ -130,31 +130,32 @@ export default {
       });
       // change 이벤트 발생시 gridStack items로 처리하지말고
       // 따로 포지션 값을 구하는 함수로 구현?
-      console.log(this.grid.el.childNodes[0].attributes);
-      console.log(this.grid.el.children);
-      this.grid.on('change', (event, items) => {
-        // this.$refs.item.forEach((item, i) => {
-        //   if (item === items[i].el) {
-        //     console.log(1);
-        //   }
-        // });
-        // console.log(this.$refs.item[0]);
-        console.log(items);
-        // // $emit('changePosition');
+
+      this.grid.on('change', event => {
+        this.setCurrentPositionValue();
+        // console.log(this.currentPosition);
+        this.$emit('move:position', this.currentPosition);
       });
     },
-    // setCurrentPositionValue() {
-    //   this.currentPosition = [];
-    //   this.$refs.item.forEach(item => {
-    //     this.currentPosition.push({
-    //       width: item.getAttribute('gs-w'),
-    //       height: item.getAttribute('gs-h'),
-    //       x: item.getAttribute('gs-x'),
-    //       y: item.getAttribute('gs-y'),
-    //     });
-    //   });
-    //   console.log(this.currentPosition);
-    // },
+    setCurrentPositionValue() {
+      // this.$refs.item.forEach(item => {
+      //   this.currentPosition.push({
+      //     width: item.getAttribute('gs-w'),
+      //     height: item.getAttribute('gs-h'),
+      //     x: item.getAttribute('gs-x'),
+      //     y: item.getAttribute('gs-y'),
+      //   });
+      // });
+      // grid에서 가져온 엘리먼트의 attribute 에서 뽑은 gs-w를 비교 (너무 비효율적)
+      let filteredPosition = Array.from(this.grid.el.childNodes).filter(
+        (node, i) => {
+          return (
+            node.attributes['gs-w'].value != this.postItems[i].position[0].width
+          );
+        },
+      );
+      console.log(filteredPosition);
+    },
   },
 };
 </script>
