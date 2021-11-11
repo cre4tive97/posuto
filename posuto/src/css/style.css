@@ -80,7 +80,9 @@ body {
     border-radius: 50%;
     transition: all 0.3s;
   }
-  .setting__btn:hover {
+  .setting__btn:hover,
+  .add__btn:hover,
+  .save__btn:hover {
     transform: scale(1.1);
     color: rgba(94, 154, 198,1);
     cursor: pointer;
@@ -92,7 +94,6 @@ body {
     border-style: none;
     font-size: 2rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 2.5rem;
@@ -101,9 +102,18 @@ body {
     border-radius: 50%;
     transition: all 0.3s;
   }
-  .add__btn:hover {
-    transform: scale(1.1);
-    color: rgba(94, 154, 198,1);
-    cursor: pointer;
+  .save__btn {
+    position: fixed;
+    bottom: 7rem;
+    right: 1rem;
+    border-style: none;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: rgba(94, 154, 198, 0.7);
+    border-radius: 50%;
+    transition: all 0.3s;
   }
-

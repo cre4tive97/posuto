@@ -2,8 +2,8 @@ import 'gridstack/dist/gridstack.min.css';
 import { GridStack } from 'gridstack';
 import 'gridstack/dist/h5/gridstack-dd-native';
 
-export function setGrid() {
-  this.grid = GridStack.init({
+export function setGrid(grid) {
+  grid = GridStack.init({
     float: true,
     cellHeight: '50px',
     minRow: 13,

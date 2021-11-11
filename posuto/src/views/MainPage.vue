@@ -5,12 +5,16 @@
       @deletePost="deletePost"
       @startEditing="startEditing"
       @finishEditing="finishEditing"
+      :key="conponentKey"
     />
     <transition name="settingAnimation">
       <AppSetting v-if="settingState" />
     </transition>
     <button class="add__btn" @click="createNewPost">
       <i class="far fa-sticky-note"></i>
+    </button>
+    <button class="save__btn" @click="positionSave">
+      <i class="far fa-save"></i>
     </button>
     <button class="setting__btn" @click="settingState = !settingState">
       <i class="fas fa-cog"></i>
@@ -21,6 +25,7 @@
 <script>
 import AppSetting from '@/components/common/AppSetting.vue';
 import PostListView from '@/components/PostListView.vue';
+
 import {
   getPostData,
   addPostData,
@@ -38,6 +43,7 @@ export default {
       postItems: [],
       settingState: false,
       updateStatus: false,
+      conponentKey: 0,
     };
   },
   created() {
@@ -66,9 +72,9 @@ export default {
           isEditing: true,
         });
         // Refresh
-        this.fetchPostData();
+        await this.fetchPostData();
+        this.componentKey++;
       } catch (error) {
-        console.log(error.response);
         if (error.response.status === 400) {
           alert('새로운 포스트가 이미 존재합니다.');
         } else if (error.response.status === 500) {
@@ -78,6 +84,7 @@ export default {
         }
       }
     },
+    // 포스트 삭제
     async deletePost(postId) {
       try {
         await deletePostData(postId);
@@ -94,9 +101,11 @@ export default {
         }
       }
     },
+    // 수정 시작 버튼 클릭
     startEditing(i) {
       this.postItems[i].isEditing = true;
     },
+    // 수정 완료, 데이터 저장
     async finishEditing(postItem, postData) {
       const id = postItem._id;
       try {
@@ -137,6 +146,7 @@ export default {
         }
       }
     },
+    positionSave() {},
   },
 };
 </script>

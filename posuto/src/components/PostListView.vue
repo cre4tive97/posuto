@@ -4,7 +4,7 @@
       v-for="(postItem, i) in postItems"
       ref="item"
       :key="i"
-      class="grid-stack-item"
+      class="grid-stack-item ui-draggable ui-resizable ui-resizable-autohide"
       @mouseover="onMouseOver(i)"
       @mouseleave="onMouseLeave(i)"
       :gs-w="`${postItem.position[0].width}`"
@@ -72,8 +72,13 @@ export default {
     postItems: Array,
   },
   updated() {
-    setGrid();
+    setGrid(this.grid);
   },
+  // watch: {
+  //   postItems: () => {
+  //     setGrid(this.grid);
+  //   },
+  // },
   methods: {
     onMouseOver(i) {
       this.$refs.btnGroup[i].classList.remove('hidden');
