@@ -128,10 +128,19 @@ export default {
             navigator.userAgent,
           ),
       });
+      // change 이벤트 발생시 gridStack items로 처리하지말고
+      // 따로 포지션 값을 구하는 함수로 구현?
+      console.log(this.grid.el.childNodes[0].attributes);
+      console.log(this.grid.el.children);
       this.grid.on('change', (event, items) => {
-        console.log(event.target);
-        console.log(items[0].w);
-        // $emit('changePosition');
+        // this.$refs.item.forEach((item, i) => {
+        //   if (item === items[i].el) {
+        //     console.log(1);
+        //   }
+        // });
+        // console.log(this.$refs.item[0]);
+        console.log(items);
+        // // $emit('changePosition');
       });
     },
     // setCurrentPositionValue() {
