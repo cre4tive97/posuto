@@ -58,7 +58,9 @@
 </template>
 
 <script>
-import { setGrid } from '@/utils/grid';
+import 'gridstack/dist/gridstack.min.css';
+import { GridStack } from 'gridstack';
+import 'gridstack/dist/h5/gridstack-dd-native';
 
 export default {
   data() {
@@ -74,13 +76,7 @@ export default {
   },
 
   updated() {
-    // if (this.currentPosition.length === 0) {
-    //   this.postItems.forEach(item => {
-    //     this.currentPosition.push(item.position[0]);
-    //   });
-    // }
-    this.setCurrentPositionValue();
-    setGrid(this.grid);
+    this.setGrid();
   },
   methods: {
     onMouseOver(i) {
@@ -118,17 +114,38 @@ export default {
       this.currentEditingTitle = '';
       this.currentEditingContents = '';
     },
-    setCurrentPositionValue() {
-      this.$refs.item.forEach(item => {
-        this.currentPosition.push({
-          width: item.getAttribute('gs-w'),
-          height: item.getAttribute('gs-h'),
-          x: item.getAttribute('gs-x'),
-          y: item.getAttribute('gs-y'),
-        });
+    setGrid() {
+      //Grid init
+      this.grid = GridStack.init({
+        float: true,
+        cellHeight: '50px',
+        minRow: 13,
+        resizable: {
+          handles: 'e,se,s,w',
+        },
+        alwaysShowResizeHandle:
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent,
+          ),
       });
-      console.log(this.currentPosition);
+      this.grid.on('change', (event, items) => {
+        console.log(event.target);
+        console.log(items[0].w);
+        // $emit('changePosition');
+      });
     },
+    // setCurrentPositionValue() {
+    //   this.currentPosition = [];
+    //   this.$refs.item.forEach(item => {
+    //     this.currentPosition.push({
+    //       width: item.getAttribute('gs-w'),
+    //       height: item.getAttribute('gs-h'),
+    //       x: item.getAttribute('gs-x'),
+    //       y: item.getAttribute('gs-y'),
+    //     });
+    //   });
+    //   console.log(this.currentPosition);
+    // },
   },
 };
 </script>

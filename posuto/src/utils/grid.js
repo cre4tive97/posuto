@@ -15,4 +15,10 @@ export function setGrid(grid) {
         navigator.userAgent,
       ),
   });
+  grid.on('change', (event, items) => {
+    let currentPositionValue = [];
+    items.forEach(item => {
+      console.log(item.el.getAttribute('gs-x'));
+    });
+  });
 }
