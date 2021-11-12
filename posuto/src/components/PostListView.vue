@@ -137,25 +137,7 @@ export default {
         this.$emit('move:position', this.currentPosition);
       });
     },
-    setCurrentPositionValue() {
-      // this.$refs.item.forEach(item => {
-      //   this.currentPosition.push({
-      //     width: item.getAttribute('gs-w'),
-      //     height: item.getAttribute('gs-h'),
-      //     x: item.getAttribute('gs-x'),
-      //     y: item.getAttribute('gs-y'),
-      //   });
-      // });
-      // grid에서 가져온 엘리먼트의 attribute 에서 뽑은 gs-w를 비교 (너무 비효율적)
-      let filteredPosition = Array.from(this.grid.el.childNodes).filter(
-        (node, i) => {
-          return (
-            node.attributes['gs-w'].value != this.postItems[i].position[0].width
-          );
-        },
-      );
-      console.log(filteredPosition);
-    },
+    setCurrentPositionValue() {},
   },
 };
 </script>
