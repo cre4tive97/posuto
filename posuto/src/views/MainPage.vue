@@ -13,9 +13,6 @@
     <button class="add__btn" @click="createNewPost">
       <i class="far fa-sticky-note"></i>
     </button>
-    <button class="save__btn">
-      <i class="far fa-save"></i>
-    </button>
     <button class="setting__btn" @click="settingState = !settingState">
       <i class="fas fa-cog"></i>
     </button>
@@ -49,6 +46,7 @@ export default {
     this.fetchPostData();
   },
   methods: {
+    // 전체 포스트 조회
     async fetchPostData() {
       try {
         // 포스트 데이터 불러오기
@@ -61,6 +59,7 @@ export default {
         }
       }
     },
+    // 포스트 생성
     async createNewPost() {
       try {
         // 디폴트 포스트를 생성
@@ -148,21 +147,14 @@ export default {
     // 포지션 변경시 전체 포스트 위치 저장
     async savePosition(positionArray) {
       // custom event로 받아온 포지션 배열 내부 객체의 id Key의 value를 배열에 담음
-      let positionId = await positionArray.map(position => position.id);
+      let positionId = positionArray.map(position => position.id);
       // 서버에서 받아온 포스트 데이터와 custom event로 받아온 포지션 데이터를 비교해 id가 같은 배열을 리턴함.
-      let changedPostItems = await this.postItems.filter(item => {
+      let changedPostItems = this.postItems.filter(item => {
         return positionId.includes(item._id) ? item : null;
       });
       // 이중 for문 쓰기 싫은데, 이틀간 고민해도 마땅한 코드가 생각나지 않음..
-      // 이벤트 발생한 횟수만큼 함수가 실행되는 버그 있음
-      // for (let i = 0; i < positionArray.length; i++) {
-      //   changedPostItems.forEach(item => {
-      //     if (item._id == positionArray[i].id) {
-      //       item.position = [positionArray[i]];
-      //     }
-      //   });
-      // }
-      await positionArray.forEach(positionValue => {
+      // positionArray와 changedPostItems의 객체의 id를 비교해 changedPostItems의 position 수정함.
+      positionArray.forEach(positionValue => {
         changedPostItems.forEach(item => {
           if (item._id == positionValue.id) {
             item.position[0] = positionValue;
@@ -181,14 +173,4 @@ export default {
 };
 </script>
 
-<style>
-.settingAnimation-enter,
-.settingAnimation-leave-to {
-  opacity: 0;
-  transform: translateX(200px);
-}
-.settingAnimation-enter-active,
-.settingAnimation-leave-active {
-  transition: all 0.5s;
-}
-</style>
+<style></style>

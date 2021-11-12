@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from '@/store/index';
 
 Vue.use(Router);
 
@@ -8,7 +9,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      redirect: '/main',
     },
     {
       path: '/login',
@@ -21,8 +22,17 @@ const router = new Router({
     {
       path: '/main',
       component: () => import('@/views/MainPage.vue'),
+      meta: { auth: true },
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth && !store.getters.isLogin) {
+    next('/login');
+    return;
+  }
+  next();
 });
 
 export default router;

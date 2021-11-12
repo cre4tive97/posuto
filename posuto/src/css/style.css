@@ -81,8 +81,7 @@ body {
     transition: all 0.3s;
   }
   .setting__btn:hover,
-  .add__btn:hover,
-  .save__btn:hover {
+  .add__btn:hover {
     transform: scale(1.1);
     color: rgba(94, 154, 198,1);
     cursor: pointer;
@@ -102,18 +101,14 @@ body {
     border-radius: 50%;
     transition: all 0.3s;
   }
-  .save__btn {
-    position: fixed;
-    bottom: 7rem;
-    right: 1rem;
-    border-style: none;
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    color: rgba(94, 154, 198, 0.7);
-    border-radius: 50%;
-    transition: all 0.3s;
+
+  /* Animation */
+  .settingAnimation-enter,
+  .settingAnimation-leave-to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  .settingAnimation-enter-active,
+  .settingAnimation-leave-active {
+    transition: all 0.5s;
   }

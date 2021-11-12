@@ -69,7 +69,6 @@ export default {
       grid: undefined,
       currentEditingTitle: '',
       currentEditingContents: '',
-      currentPosition: [],
     };
   },
   props: {
@@ -129,13 +128,14 @@ export default {
             navigator.userAgent,
           ),
       });
-      // change 이벤트 발생시 gridStack items로 처리하지말고
-      // 따로 포지션 값을 구하는 함수로 구현?
-
       this.grid.on('change', (event, items) => {
-        console.log(items);
-        let currentPositionValue = this.setCurrentPositionValue(items);
-        this.$emit('save:position', currentPositionValue);
+        this.$emit('save:position', this.setCurrentPositionValue(items));
+      });
+      this.grid.on('dragstart', () => {
+        document.body.style.cursor = 'grabbing';
+      });
+      this.grid.on('dragstop', () => {
+        document.body.style.cursor = 'grab';
       });
     },
     setCurrentPositionValue(items) {
