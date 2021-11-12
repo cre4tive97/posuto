@@ -146,14 +146,18 @@ export default {
       }
     },
     // 포지션 변경시 전체 포스트 위치 저장
-    savePosition(positionArray) {
+    async savePosition(positionArray) {
       console.log(positionArray);
-      console.log(this.postItems);
-      positionArray.forEach(position => {
-        let changedPostItems = this.postItems.filter(
-          postItem => postItem._id == position.id,
-        );
-        console.log(changedPostItems);
+      let positionId = positionArray.map(position => position.id);
+      let changedPostItems = this.postItems.filter(item => {
+        return positionId.includes(item._id) ? item : null;
+      });
+      changedPostItems.forEach((item, i) => {
+        item.position = [positionArray[i]];
+      });
+      console.log(changedPostItems);
+      positionArray.forEach((item, i) => {
+        updatePostData(changedPostItems[i]._id, changedPostItems[i]);
       });
     },
   },
