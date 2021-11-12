@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Spinner v-if="isLoading" />
     <PostListView
       :postItems="postItems"
       @deletePost="deletePost"
@@ -22,6 +23,7 @@
 <script>
 import AppSetting from '@/components/common/AppSetting.vue';
 import PostListView from '@/components/PostListView.vue';
+import Spinner from '@/components/common/Spinner.vue';
 
 import {
   getPostData,
@@ -34,14 +36,17 @@ export default {
   components: {
     PostListView,
     AppSetting,
+    Spinner,
   },
   data() {
     return {
       postItems: [],
       settingState: false,
       updateStatus: false,
+      isLoading: false,
     };
   },
+
   created() {
     this.fetchPostData();
   },
@@ -49,9 +54,12 @@ export default {
     // 전체 포스트 조회
     async fetchPostData() {
       try {
+        // 스피너 On
+        this.isLoading = true;
         // 포스트 데이터 불러오기
         const { data } = await getPostData();
         this.postItems = data.posts;
+        this.isLoading = false;
       } catch (error) {
         // 권한 에러 뜰 경우 login페이지로 이동
         if (error.response.status === 401) {
