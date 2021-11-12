@@ -154,6 +154,7 @@ export default {
         return positionId.includes(item._id) ? item : null;
       });
       // 이중 for문 쓰기 싫은데, 이틀간 고민해도 마땅한 코드가 생각나지 않음..
+      // 이벤트 발생한 횟수만큼 함수가 실행되는 버그 있음
       for (let i = 0; i < positionArray.length; i++) {
         changedPostItems.forEach(item => {
           if (item._id == positionArray[i].id) {
