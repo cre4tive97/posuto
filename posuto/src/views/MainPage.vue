@@ -156,6 +156,7 @@ export default {
         item.position = [positionArray[i]];
       });
       console.log(changedPostItems);
+      // 먼저 생긴 포스트를 밑에서 위로 드래그 했을때 오류뜨는 버그 있음
       positionArray.forEach((item, i) => {
         updatePostData(changedPostItems[i]._id, changedPostItems[i]);
       });
