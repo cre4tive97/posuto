@@ -133,6 +133,7 @@ export default {
       // 따로 포지션 값을 구하는 함수로 구현?
 
       this.grid.on('change', (event, items) => {
+        console.log(items);
         let currentPositionValue = this.setCurrentPositionValue(items);
         this.$emit('save:position', currentPositionValue);
       });

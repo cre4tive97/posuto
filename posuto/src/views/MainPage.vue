@@ -147,19 +147,29 @@ export default {
     },
     // 포지션 변경시 전체 포스트 위치 저장
     async savePosition(positionArray) {
-      console.log(positionArray);
-      let positionId = positionArray.map(position => position.id);
-      let changedPostItems = this.postItems.filter(item => {
+      // custom event로 받아온 포지션 배열 내부 객체의 id Key의 value를 배열에 담음
+      let positionId = await positionArray.map(position => position.id);
+      // 서버에서 받아온 포스트 데이터와 custom event로 받아온 포지션 데이터를 비교해 id가 같은 배열을 리턴함.
+      let changedPostItems = await this.postItems.filter(item => {
         return positionId.includes(item._id) ? item : null;
       });
-      changedPostItems.forEach((item, i) => {
-        item.position = [positionArray[i]];
-      });
-      console.log(changedPostItems);
-      // 먼저 생긴 포스트를 밑에서 위로 드래그 했을때 오류뜨는 버그 있음
-      positionArray.forEach((item, i) => {
-        updatePostData(changedPostItems[i]._id, changedPostItems[i]);
-      });
+      // 이중 for문 쓰기 싫은데, 이틀간 고민해도 마땅한 코드가 생각나지 않음..
+      for (let i = 0; i < positionArray.length; i++) {
+        changedPostItems.forEach(item => {
+          if (item._id == positionArray[i].id) {
+            item.position = [positionArray[i]];
+          }
+        });
+      }
+      try {
+        await changedPostItems.forEach(item => {
+          updatePostData(item._id, item);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
+      console.log(1);
     },
   },
 };
