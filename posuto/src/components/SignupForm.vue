@@ -61,7 +61,9 @@ export default {
         this.registerdNickname = data.nickname;
         this.signupSuccess = true;
       } catch (error) {
-        console.log(error.response.data);
+        if (error.response.status === 409) {
+          alert('이미 사용중인 Username 입니다!');
+        }
       } finally {
         this.initForm();
       }

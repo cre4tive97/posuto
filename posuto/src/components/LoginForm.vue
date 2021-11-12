@@ -14,7 +14,9 @@
       <label for="password">Password</label>
       <input class="input" id="password" type="text" v-model="password" />
     </div>
-    <button class="btn">Login</button>
+    <button class="btn" :disabled="!isUsernameValid || !username || !password">
+      Login
+    </button>
   </form>
 </template>
 
@@ -38,7 +40,9 @@ export default {
         });
         this.$router.push('/main');
       } catch (error) {
-        console.log(error.response.data);
+        if (error.response.status === 401) {
+          alert('Username 또는 Password가 틀렸습니다!');
+        }
       } finally {
         this.initForm();
       }
