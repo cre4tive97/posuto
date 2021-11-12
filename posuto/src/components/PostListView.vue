@@ -13,6 +13,7 @@
       :gs-y="`${postItem.position[0].y}`"
       gs-min-w="3"
       gs-min-h="5"
+      :id="postItem._id"
     >
       <div class="grid-stack-item-content">
         <div class="post__header">
@@ -131,13 +132,24 @@ export default {
       // change 이벤트 발생시 gridStack items로 처리하지말고
       // 따로 포지션 값을 구하는 함수로 구현?
 
-      this.grid.on('change', event => {
-        this.setCurrentPositionValue();
-        // console.log(this.currentPosition);
-        this.$emit('move:position', this.currentPosition);
+      this.grid.on('change', (event, items) => {
+        let currentPositionValue = this.setCurrentPositionValue(items);
+        this.$emit('save:position', currentPositionValue);
       });
     },
-    setCurrentPositionValue() {},
+    setCurrentPositionValue(items) {
+      let position = [];
+      items.forEach(item => {
+        position.push({
+          width: item.w,
+          height: item.h,
+          x: item.x,
+          y: item.y,
+          id: item.el.id,
+        });
+      });
+      return position;
+    },
   },
 };
 </script>

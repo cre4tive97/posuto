@@ -5,7 +5,7 @@
       @deletePost="deletePost"
       @startEditing="startEditing"
       @finishEditing="finishEditing"
-      @move:position="savePosition"
+      @save:position="savePosition"
     />
     <transition name="settingAnimation">
       <AppSetting v-if="settingState" />
@@ -146,7 +146,16 @@ export default {
       }
     },
     // 포지션 변경시 전체 포스트 위치 저장
-    savePosition() {},
+    savePosition(positionArray) {
+      console.log(positionArray);
+      console.log(this.postItems);
+      positionArray.forEach(position => {
+        let changedPostItems = this.postItems.filter(
+          postItem => postItem._id == position.id,
+        );
+        console.log(changedPostItems);
+      });
+    },
   },
 };
 </script>
