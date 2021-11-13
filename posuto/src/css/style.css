@@ -106,7 +106,7 @@ body {
   .settingAnimation-enter,
   .settingAnimation-leave-to {
     opacity: 0;
-    transform: translateX(200px);
+    transform: translateY(100%);
   }
   .settingAnimation-enter-active,
   .settingAnimation-leave-active {
