@@ -14,6 +14,7 @@ export default new Vuex.Store({
   state: {
     token: getAuthFromCookie() || '',
     nickname: getUserFromCookie() || '',
+    postColor: '#FEC0CA',
   },
   getters: {
     isLogin(state) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     clearNickname(state) {
       state.nickname = '';
+    },
+    setPostColor(state, color) {
+      state.postColor = color;
     },
   },
   actions: {

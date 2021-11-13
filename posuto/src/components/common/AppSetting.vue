@@ -3,7 +3,12 @@
     <div class="color">
       <h1 class="color__title">Color</h1>
       <div class="color__section">
-        <div class="color__btn" v-for="(color, i) in colors" :key="i">
+        <div
+          class="color__btn"
+          v-for="(color, i) in colors"
+          :key="i"
+          @click="selectPostColor(color.color)"
+        >
           <div
             class="color__circle"
             :style="{ backgroundColor: color.color }"
@@ -31,6 +36,12 @@ export default {
       ],
     };
   },
+  methods: {
+    selectPostColor(color) {
+      console.log(color);
+      this.$store.commit('setPostColor', color);
+    },
+  },
 };
 </script>
 
@@ -41,13 +52,12 @@ export default {
   right: 4rem;
   border-radius: 1rem;
   padding: 8px;
-  background-color: rgba(42, 128, 170, 0.4);
-  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color: rgba(42, 128, 170, 0.5);
   backdrop-filter: blur(16px);
   width: 50%;
   max-width: 400px;
   min-width: 250px;
-  color: white;
+  color: #f5f5f6;
 }
 h1 {
   font-size: 1.5rem;

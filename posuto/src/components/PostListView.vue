@@ -15,7 +15,10 @@
       gs-min-h="5"
       :id="postItem._id"
     >
-      <div class="grid-stack-item-content">
+      <div
+        class="grid-stack-item-content"
+        :style="{ backgroundColor: $store.state.postColor }"
+      >
         <div class="post__header">
           <form @submit.prevent v-if="postItem.isEditing" class="post__form">
             <input
@@ -210,13 +213,13 @@ export default {
 }
 
 .grid-stack-item-content {
-  background: pink;
   border-top-right-radius: 1rem;
   padding: 12px;
   -webkit-box-shadow: 0px 9px 24px 3px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 9px 24px 3px rgba(0, 0, 0, 0.15);
   overflow: auto;
   overflow-wrap: break-word;
+  transition: background-color 0.5s;
 }
 .grid-stack-item-content:hover {
   cursor: grab;
