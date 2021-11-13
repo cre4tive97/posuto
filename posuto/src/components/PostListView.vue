@@ -30,10 +30,20 @@
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
               v-if="postItem.isEditing"
-              @click="emitFinishEditing(i, postItem)"
+              @click="
+                emitFinishEditing(i, postItem);
+                isEditing = false;
+              "
               class="fas fa-edit"
             ></i>
-            <i v-else @click="$emit('startEditing', i)" class="far fa-edit"></i>
+            <i
+              v-else
+              @click="
+                $emit('startEditing', i);
+                isEditing = true;
+              "
+              class="far fa-edit"
+            ></i>
             <i
               class="far fa-trash-alt"
               @click="$emit('deletePost', postItem._id)"
@@ -69,6 +79,7 @@ export default {
       grid: undefined,
       currentEditingTitle: '',
       currentEditingContents: '',
+      isEditing: false,
     };
   },
   props: {
@@ -78,6 +89,7 @@ export default {
   updated() {
     this.setGrid();
   },
+
   methods: {
     onMouseOver(i) {
       this.$refs.btnGroup[i].classList.remove('hidden');
@@ -129,8 +141,17 @@ export default {
           ),
       });
       this.grid.on('change', (event, items) => {
-        this.$emit('save:position', this.setCurrentPositionValue(items));
+        if (this.isEditing === false) {
+          this.$emit('save:position', this.setCurrentPositionValue(items));
+        }
       });
+      if (this.isEditing === true) {
+        this.grid.enableMove(false);
+        this.grid.enableResize(false);
+      } else {
+        this.grid.enableMove(true);
+        this.grid.enableResize(true);
+      }
       this.grid.on('dragstart', () => {
         document.body.style.cursor = 'grabbing';
       });
