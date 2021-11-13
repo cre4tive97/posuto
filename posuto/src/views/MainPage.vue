@@ -75,7 +75,7 @@ export default {
           title: '',
           contents: '',
           position: [{ width: '3', height: '3', x: '0', y: '0' }],
-          isEditing: true,
+          isEditing: false,
         });
         // Refresh
         await this.fetchPostData();

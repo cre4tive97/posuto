@@ -24,6 +24,10 @@ const router = new Router({
       component: () => import('@/views/MainPage.vue'),
       meta: { auth: true },
     },
+    {
+      path: '*',
+      component: () => import('@/views/NotFoundPage.vue'),
+    },
   ],
 });
 
