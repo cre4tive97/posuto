@@ -36,14 +36,7 @@
               "
               class="fas fa-edit"
             ></i>
-            <i
-              v-else
-              @click="
-                $emit('startEditing', i);
-                isEditing = true;
-              "
-              class="far fa-edit"
-            ></i>
+            <i v-else @click="emitStartEditing(i)" class="far fa-edit"></i>
             <i
               class="far fa-trash-alt"
               @click="$emit('deletePost', postItem._id)"
@@ -110,6 +103,14 @@ export default {
     matchContents(e) {
       this.currentEditingContents = e.target.value;
     },
+    emitStartEditing(i) {
+      if (this.isEditing !== true) {
+        this.$emit('startEditing', i);
+        this.isEditing = true;
+      } else {
+        alert('이미 수정중인 게시물이 있습니다.');
+      }
+    },
     async emitFinishEditing(i, postItem) {
       const postData = {
         title: this.currentEditingTitle,
@@ -141,14 +142,18 @@ export default {
           ),
       });
       this.grid.on('change', (event, items) => {
+        // 수정버튼 클릭시 Form에 내용 작성할 경우 또한 'change'로 감지됨.
+        // 모든 수정버튼이 비활성화 되었을 때에만 custom event 보냄.
         if (this.isEditing === false) {
           this.$emit('save:position', this.setCurrentPositionValue(items));
         }
       });
       if (this.isEditing === true) {
+        // 수정버튼 활성화시 포스트 이동/리사이즈 비활성화
         this.grid.enableMove(false);
         this.grid.enableResize(false);
       } else {
+        // 수정버튼 비활성화시 포스트 이동/리사이즈 활성화
         this.grid.enableMove(true);
         this.grid.enableResize(true);
       }
