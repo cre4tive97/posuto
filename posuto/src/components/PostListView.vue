@@ -87,25 +87,27 @@ export default {
   },
 
   methods: {
+    // 포스트 위에 마우스 올릴 시 버튼을 보여줌
     onMouseOver(i) {
       this.$refs.btnGroup[i].classList.remove('hidden');
     },
+    // 포스트 위에서 마우스가 사라지면 버튼을 사라지게 함
     onMouseLeave(i) {
       this.$refs.btnGroup[i].classList.add('hidden');
     },
+    // 수정버튼 활성화
     emitEditPost() {
       this.$emit('editPost');
     },
-    editPostTitle(e) {
-      console.log(e.value);
-      e.value = this.currentEditingTitle;
-    },
+    // 현재 수정중 포스트 타이틀과 currentEditingTitle의 값을 일치화
     matchTitle(e) {
       this.currentEditingTitle = e.target.value;
     },
+    // 현재 수정중 포스트 컨텐츠과 currentEditingContents의 값을 일치화
     matchContents(e) {
       this.currentEditingContents = e.target.value;
     },
+    // 만약 현재 수정중인 포스트가 없다면, 수정 버튼을 활성화하고 MainPage.vue로 emit
     emitStartEditing(i) {
       if (this.isEditing !== true) {
         this.$emit('startEditing', i);
@@ -114,7 +116,8 @@ export default {
         alert('이미 수정중인 게시물이 있습니다.');
       }
     },
-    async emitFinishEditing(i, postItem) {
+    // 현재 포스트의 수정된 데이터를 postData에 담아, MainPage 컴포넌트로 보냄.
+    emitFinishEditing(i, postItem) {
       const postData = {
         title: this.currentEditingTitle,
         contents: this.currentEditingContents,
@@ -126,10 +129,15 @@ export default {
         },
         isEditing: false,
       };
-      await this.$emit('finishEditing', postItem, postData);
+      this.$emit('finishEditing', postItem, postData);
+      initCurrentEditingPost();
+    },
+    // CurrentEditing 타이틀/컨텐츠 초기화
+    initCurrentEditingPost() {
       this.currentEditingTitle = '';
       this.currentEditingContents = '';
     },
+    // GridStack 세팅.
     setGrid() {
       //Grid init
       this.grid = GridStack.init({
@@ -160,13 +168,16 @@ export default {
         this.grid.enableMove(true);
         this.grid.enableResize(true);
       }
+      // 드래그 시작시 커서 변경
       this.grid.on('dragstart', () => {
         document.body.style.cursor = 'grabbing';
       });
+      // 드래그 종료시 커서 변경
       this.grid.on('dragstop', () => {
         document.body.style.cursor = 'grab';
       });
     },
+    // 이동/리사이즈 이벤트가 발생한 아이템들의 포지션값을 리턴함
     setCurrentPositionValue(items) {
       let position = [];
       items.forEach(item => {

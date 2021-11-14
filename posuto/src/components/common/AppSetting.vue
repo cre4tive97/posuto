@@ -26,11 +26,11 @@ export default {
     return {
       colors: [
         { color: '#FEC0CA', name: 'Pink' },
-        { color: '#ff7fff', name: 'Purple' },
+        { color: '#2dfff1', name: 'Mint' },
         { color: '#96d5ff', name: 'Skyblue' },
         { color: '#f2f486', name: 'Yellow' },
         { color: '#5ec4ff', name: 'Blue' },
-        { color: '#8cff9b', name: 'Green' },
+        { color: '#a5ffb9', name: 'Green' },
         { color: '#DAC6AE', name: 'Beige' },
         { color: '#ff7d3d', name: 'Orange' },
       ],
@@ -58,6 +58,8 @@ export default {
   max-width: 400px;
   min-width: 250px;
   color: #f5f5f6;
+  display: flex;
+  flex-direction: column;
 }
 h1 {
   font-size: 1.5rem;
