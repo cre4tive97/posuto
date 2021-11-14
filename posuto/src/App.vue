@@ -19,4 +19,7 @@ export default {
 <style>
 @import './css/reset.css';
 @import './css/style.css';
+#app {
+  height: 100vh;
+}
 </style>

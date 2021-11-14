@@ -1,7 +1,9 @@
 <template>
-  <div class="loginPage">
-    <p class="form__title">Login</p>
-    <LoginForm />
+  <div class="page">
+    <div class="form__container">
+      <p class="form__title">Login</p>
+      <LoginForm />
+    </div>
   </div>
 </template>
 

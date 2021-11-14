@@ -1,7 +1,9 @@
 <template>
-  <div class="signupPage">
-    <p class="form__title">Sign Up</p>
-    <SignupForm />
+  <div class="page">
+    <div class="form__container">
+      <p class="form__title">Sign Up</p>
+      <SignupForm />
+    </div>
   </div>
 </template>
 
@@ -14,4 +16,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

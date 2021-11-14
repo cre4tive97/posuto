@@ -9,6 +9,14 @@ body {
     background-color: #F5F5F6;
 }
 
+.page {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .hidden {
   display: none;
 }
@@ -54,12 +62,21 @@ body {
   background-color: var(--main-dark);
 }
 .form__title {
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 3.5rem;
     margin-bottom: 2rem;
+  }
+
+  .form__container {
+    background-color: #efefef;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    width: 70%;
+    min-width: 350px;
+    max-width: 600px;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
   }
 
 /* Fixed buttons */
