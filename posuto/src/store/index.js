@@ -46,5 +46,9 @@ export default new Vuex.Store({
       saveAuthToCookie(data.token);
       saveUserToCookie(data.user.nickname);
     },
+    GET_POSTCOLOR({ commit }) {
+      const color = localStorage.getItem('post_color');
+      commit('setPostColor', color);
+    },
   },
 });

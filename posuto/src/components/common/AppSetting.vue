@@ -38,8 +38,8 @@ export default {
   },
   methods: {
     selectPostColor(color) {
-      console.log(color);
-      this.$store.commit('setPostColor', color);
+      localStorage.setItem('post_color', color);
+      this.$store.dispatch('GET_POSTCOLOR');
     },
   },
 };

@@ -45,12 +45,14 @@ export default {
       username: '',
       password: '',
       nickname: '',
+      // modal
       registerdNickname: '',
       signupSuccess: false,
     };
   },
   mixins: [FormMixin],
   methods: {
+    // 폼 제출할시 폼 데이터를 서버로 post 요청후, 모달창을 보여줌
     async submitForm() {
       try {
         const { data } = await registerUser({
@@ -58,8 +60,7 @@ export default {
           password: this.password,
           nickname: this.nickname,
         });
-        this.registerdNickname = data.nickname;
-        this.signupSuccess = true;
+        showSignupModal(data);
       } catch (error) {
         if (error.response.status === 409) {
           alert('이미 사용중인 Username 입니다!');
@@ -67,6 +68,11 @@ export default {
       } finally {
         this.initForm();
       }
+    },
+
+    showSignupModal(data) {
+      this.registerdNickname = data.nickname;
+      this.signupSuccess = true;
     },
   },
 };

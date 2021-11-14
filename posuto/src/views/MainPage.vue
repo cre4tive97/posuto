@@ -49,6 +49,7 @@ export default {
 
   created() {
     this.fetchPostData();
+    this.$store.dispatch('GET_POSTCOLOR');
   },
   methods: {
     // 전체 포스트 조회
