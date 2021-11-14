@@ -130,7 +130,8 @@ export default {
         isEditing: false,
       };
       this.$emit('finishEditing', postItem, postData);
-      initCurrentEditingPost();
+      this.isEditing = false;
+      this.initCurrentEditingPost();
     },
     // CurrentEditing 타이틀/컨텐츠 초기화
     initCurrentEditingPost() {
@@ -174,7 +175,7 @@ export default {
       });
       // 드래그 종료시 커서 변경
       this.grid.on('dragstop', () => {
-        document.body.style.cursor = 'grab';
+        document.body.style.cursor = 'auto';
       });
     },
     // 이동/리사이즈 이벤트가 발생한 아이템들의 포지션값을 리턴함
@@ -197,7 +198,7 @@ export default {
 
 <style scoped>
 .grid-stack {
-  background: #f5f5f6;
+  background-color: #f5f5f6;
 }
 .post__header h1 {
   font-size: 1.25rem;

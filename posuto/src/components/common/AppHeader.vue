@@ -2,7 +2,7 @@
   <div class="header">
     <router-link to="/main"><AppLogo /></router-link>
     <div class="header__menu" v-if="isLogin">
-      <div class="profile">{{ nickname }}</div>
+      <div class="profile">{{ nickname }}님의 Posuto</div>
       <button @click="logout" class="link">Logout</button>
     </div>
     <div class="header__menu" v-else>
@@ -48,7 +48,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4rem;
   background: linear-gradient(
     90deg,
     rgba(160, 252, 255, 1) 0%,
@@ -70,7 +69,7 @@ export default {
   border-radius: 6px;
 }
 .profile {
-  background: rgba(0, 0, 0, 0.1);
+  background: #88d9ea;
   display: flex;
   align-items: center;
   justify-content: center;

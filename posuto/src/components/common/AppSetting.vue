@@ -1,7 +1,7 @@
 <template>
   <div class="setting">
     <div class="color">
-      <h1 class="color__title">Color</h1>
+      <h1 class="color__title">Post Color</h1>
       <div class="color__section">
         <div
           class="color__btn"
@@ -29,7 +29,7 @@ export default {
         { color: '#2dfff1', name: 'Mint' },
         { color: '#96d5ff', name: 'Skyblue' },
         { color: '#f2f486', name: 'Yellow' },
-        { color: '#5ec4ff', name: 'Blue' },
+        { color: '#F5F5F6', name: 'White' },
         { color: '#a5ffb9', name: 'Green' },
         { color: '#DAC6AE', name: 'Beige' },
         { color: '#ff7d3d', name: 'Orange' },
@@ -37,6 +37,7 @@ export default {
     };
   },
   methods: {
+    // LocalStorage에 선택한 post color를 저장하고 actions dispatch
     selectPostColor(color) {
       localStorage.setItem('post_color', color);
       this.$store.dispatch('GET_POSTCOLOR');

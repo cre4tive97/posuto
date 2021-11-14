@@ -19,12 +19,12 @@ export default {
 h1 {
   font-weight: 100;
   letter-spacing: -2px;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 h4 {
   margin: 0;
   font-weight: 400;
   letter-spacing: -2px;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 </style>
