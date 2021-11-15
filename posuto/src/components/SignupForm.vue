@@ -60,7 +60,7 @@ export default {
           password: this.password,
           nickname: this.nickname,
         });
-        showSignupModal(data);
+        this.showSignupModal(data);
       } catch (error) {
         if (error.response.status === 409) {
           alert('이미 사용중인 Username 입니다!');
