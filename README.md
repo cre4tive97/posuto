@@ -6,14 +6,22 @@
 *Just post it.* <br/>
 배포 : <a href="https://posuto.netlify.app/" target="_blank">https://posuto.netlify.app/</a>
 
+Tech Stack : <br/>
+![Vue](https://img.shields.io/badge/Vue.js-%5E2.0-success)
+![Vue-Router](https://img.shields.io/badge/Vue%20Router-%5E3.5.3-green)
+![Vuex](https://img.shields.io/badge/Vuex-%5E3.6.2-orange)
+![Express.js](https://img.shields.io/badge/Express.js-%5E4.16.4-red)
+![mongoose](https://img.shields.io/badge/mongoose-%5E5.4.20-yellowgreen)
 </br>
 </br>
 </br>
 
 ## 🤔 Posuto란?
+
 <br/>
-- Posuto는 간단한 할 일 기록, TIL을 기록하기 위한 포스트잇 어플리케이션 입니다.
-- 사랑하는 아내를 위해 기획되었지만, 많은 사람들이 유용하게 사용 가능하게 오픈소스화 했습니다.
+
+- Posuto는 간단한 할 일 기록, TIL 등을 기록하기 위한 포스트잇 어플리케이션 입니다.
+- 사랑하는 아내를 위해 기획되었지만, 많은 사람들이 유용하게 사용 가능하게 오픈소스로 배포합니다.
 - 기존 온라인 포스트잇 어플리케이션들은, 복잡한 회원가입 구조를 가지고 있고, 사용자 인스턴스를 생성하는데 시간이 소요되기도 합니다.
 이러한 복잡한 과정들을 생략하고, 간단한 회원가입과 함께 즉시 사용 가능한 포스트잇 어플리케이션이 있다면 어떨까? 라는 생각으로 개발했습니다.
 
@@ -78,7 +86,7 @@
     - Vuex
     - Axios
     - Express
-    - MongoDB
+    - MongoDB(mongoose)
 + 배포환경
     - Front-end : Netlify
     - Back-end : Heroku
@@ -90,3 +98,42 @@
 + [VSC](https://code.visualstudio.com/)
 + [node.js](https://nodejs.org/ko/)
 + [Vue Dev Tool](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+
+</br>
+</br>
+
+## ⛓ 프론트엔드 소스트리
+
+</br>
+
+```
+├── src
+   ├── App.vue
+   ├── api
+   │   └── common
+   ├── assets
+   ├── components
+   │   └── common
+   ├── css
+   ├── views
+   ├── mixins
+   ├── routes
+   ├── store
+   ├── utils
+   └── main.js ...
+
+```
+
+## ⛓ 백엔드 소스트리
+
+</br>
+
+```
+├── src
+   ├── api 
+   ├── config
+   ├── models
+   ├── utils
+   └── app.js ...
+```
+
