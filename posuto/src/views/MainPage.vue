@@ -3,6 +3,7 @@
     <Spinner v-if="isLoading" />
     <PostListView
       :postItems="postItems"
+      :isEditing="isEditing"
       @deletePost="deletePost"
       @startEditing="startEditing"
       @finishEditing="finishEditing"
@@ -44,16 +45,19 @@ export default {
       settingState: false,
       updateStatus: false,
       isLoading: false,
+      isEditing: undefined,
     };
   },
-
   created() {
+    // 포스트 조회
     this.fetchPostData();
+    // 로컬스토리지에 post_color 없다면 기본 컬러 저장
     if (!localStorage.getItem('post_color')) {
       localStorage.setItem('post_color', '#FEC0CA');
     }
     this.$store.dispatch('GET_POSTCOLOR');
   },
+
   methods: {
     // 전체 포스트 조회
     async fetchPostData() {
@@ -79,9 +83,9 @@ export default {
           title: '',
           contents: '',
           position: [{ width: '3', height: '3', x: '0', y: '0' }],
-          isEditing: false,
+          isEditing: true,
         });
-        // Refresh
+        // Refresh (gridStack reload)
         await this.fetchPostData();
         this.$router.go();
       } catch (error) {
@@ -114,6 +118,7 @@ export default {
     // 수정 시작 버튼 클릭
     startEditing(i) {
       this.postItems[i].isEditing = true;
+      this.isEditing = true;
     },
     // 수정 완료, 데이터 저장
     async finishEditing(postItem, postData) {
@@ -125,23 +130,27 @@ export default {
           postData.contents = postItem.contents;
           await updatePostData(id, postData);
           this.fetchPostData();
+          this.isEditing = false;
 
           // 기존 컨텐츠만 변경되었을 경우
         } else if (postData.title === '' && postData.contents !== '') {
           postData.title = postItem.title;
           await updatePostData(id, postData);
           this.fetchPostData();
+          this.isEditing = false;
 
           // 기존 제목만 변경되었을 경우
         } else if (postData.title !== '' && postData.contents === '') {
           postData.contents = postItem.contents;
           await updatePostData(id, postData);
           this.fetchPostData();
+          this.isEditing = false;
 
           // 기존 제목과 컨텐츠 모두 변경되었을 경우
         } else if (postData.title !== '' && postData.contents !== '') {
           await updatePostData(id, postData);
           this.fetchPostData();
+          this.isEditing = false;
         }
         // switch문 적용 가능?
       } catch (error) {

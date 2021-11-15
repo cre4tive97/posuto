@@ -33,10 +33,7 @@
           <div ref="btnGroup" class="post__btnGroup hidden">
             <i
               v-if="postItem.isEditing"
-              @click="
-                emitFinishEditing(i, postItem);
-                isEditing = false;
-              "
+              @click="emitFinishEditing(i, postItem)"
               class="fas fa-edit"
             ></i>
             <i v-else @click="emitStartEditing(i)" class="far fa-edit"></i>
@@ -75,11 +72,12 @@ export default {
       grid: undefined,
       currentEditingTitle: '',
       currentEditingContents: '',
-      isEditing: false,
+      // isEditing: false,
     };
   },
   props: {
     postItems: Array,
+    isEditing: Boolean,
   },
 
   updated() {
@@ -111,7 +109,6 @@ export default {
     emitStartEditing(i) {
       if (this.isEditing !== true) {
         this.$emit('startEditing', i);
-        this.isEditing = true;
       } else {
         alert('이미 수정중인 게시물이 있습니다.');
       }
@@ -130,7 +127,6 @@ export default {
         isEditing: false,
       };
       this.$emit('finishEditing', postItem, postData);
-      this.isEditing = false;
       this.initCurrentEditingPost();
     },
     // CurrentEditing 타이틀/컨텐츠 초기화
