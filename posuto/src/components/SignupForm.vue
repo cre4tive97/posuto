@@ -12,7 +12,7 @@
     </div>
     <div class="form-box">
       <label for="password">Password</label>
-      <input class="input" id="password" type="text" v-model="password" />
+      <input class="input" id="password" type="password" v-model="password" />
     </div>
     <div class="form-box">
       <label for="nickname">Nickname</label>
