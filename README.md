@@ -1,7 +1,10 @@
 # Posuto(ポスト)
-![posuto](./img/posuto512.png)
-*<center>Just post it.</center>*
-<center>배포 : <a href="https://posuto.netlify.app/" target="_blank">https://posuto.netlify.app/</a></center> 
+<p align="center">
+<img src="./img/posuto512.png" width="300" />
+</p>
+
+*Just post it.* <br/>
+배포 : <a href="https://posuto.netlify.app/" target="_blank">https://posuto.netlify.app/</a>
 
 </br>
 </br>
@@ -19,47 +22,71 @@
 
 ## 🖱 Posuto UI/UX 살펴보기
 </br>
-<center>
+<p align="center">
 <img src="./img/login.png" width="500" />
-</center>
+</p>
 
-- URL 접속시 최초로 보게 될 화면입니다.
-- 계정이 없을 시, 우측 상단의 Signup 버튼을 누르면 회원가입 페이지로 이동합니다.
++ URL 접속시 최초로 보게 될 화면입니다.
++ 계정이 없을 시, 우측 상단의 Signup 버튼을 누르면 회원가입 페이지로 이동합니다.
 
 </br>
-<center>
+<p align="center">
 <img src="./img/signup.png" width="500" />
-</center>
+</p>
 
-- Username은 이메일 형식으로 작성해야 합니다.
++ Username은 이메일 형식으로 작성해야 합니다.
 
 </br>
-<center>
+<p align="center">
 <img src="./img/signup2.png" width="500" />
-</center>
+</p>
 
 - Form이 비어있지 않고, Form Validation의 조건을 만족하면, Signup 버튼이 활성화 됩니다.
 
 </br>
 
-<center>
+<p align="center">
 <img src="./img/modal.png" width="500" />
-</center>
+<p/>
 
-- 성공적으로 회원가입을 마쳤다면, 귀여운 모달창이 알려줍니다.
++ 성공적으로 회원가입을 마쳤다면, 귀여운 모달창이 알려줍니다.
 
-<center>
+<p align="center">
 <img src="./img/main.gif" width="500" />
-</center>
+</p>
 
-- 우측 하단 포스트 버튼을 클릭시, 새로운 Default 포스트가 생성됩니다.
-- 포스트에 마우스를 올리고 수정 버튼을 활성화하면, 포스트가 수정이 가능한 Form 형태가 됩니다.
-- 수정을 마쳤다면, 다시 수정 버튼을 클릭해 비활성화하면, Drag&Drop/Resize 가능한 포스트잇 됩니다.
++ 우측 하단 포스트 버튼을 클릭시, 새로운 Default 포스트가 생성됩니다.
++ 포스트에 마우스를 올리고 수정 버튼을 활성화하면, 포스트가 수정이 가능한 Form 형태가 됩니다.
++ 수정을 마쳤다면, 다시 수정 버튼을 클릭해 비활성화하면, Drag&Drop/Resize 가능한 포스트잇 됩니다.
 
 </br>
 
-<center>
+<p align="center">
 <img src="./img/setting.gif" width="300" />
-</center>
+</p>
 
-- 우측 하단 설정버튼을 클릭시, 포스트잇 배경색을 선택하는 창이 나옵니다.
++ 우측 하단 설정버튼을 클릭시, 포스트잇 배경색을 선택하는 창이 나옵니다.
+
+</br>
+</br>
+
+## 🛠 기술 스택 & 배포 환경
+
++ 기술스택
+    - Vue.js 2
+    - Vue Router
+    - Vuex
+    - Axios
+    - Express
+    - MongoDB
++ 배포환경
+    - Front-end : Netlify
+    - Back-end : Heroku
+
+## ⚙️ 개발 환경
+
++ [Chrome](https://www.google.co.kr/chrome/)
++ [Git](https://git-scm.com/downloads)
++ [VSC](https://code.visualstudio.com/)
++ [node.js](https://nodejs.org/ko/)
++ [Vue Dev Tool](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
