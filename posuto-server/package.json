@@ -3,17 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
     "build": "babel src --out-dir dist --source-maps inline --copy-files",
-    "start": "node dist/app.js",
-    "heroku-postbuild": "npx webpack"
+    "start": "node ./dist/app.js",
+    "start:dev": "node dist/app.js",
+    "heroku-postbuild": "webpack-cli"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "engines": {
+    "node": "10.x",
+    "npm": "6.x"
+  },
+  "devDependencies": {},
+  "dependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
@@ -41,7 +48,7 @@
     "prettier": "^1.19.1",
     "rimraf": "^2.6.3",
     "swagger-jsdoc": "^3.5.0",
-    "swagger-ui-express": "^4.1.2"
-  },
-  "dependencies": {}
+    "swagger-ui-express": "^4.1.2",
+    "webpack-cli": "^4.9.1"
+  }
 }

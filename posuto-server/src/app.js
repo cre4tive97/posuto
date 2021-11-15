@@ -4,7 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import detectPort from 'detect-port';
+// import detectPort from 'detect-port';
 import chalk from 'chalk';
 
 // api
@@ -19,7 +19,8 @@ import { authenticateUser } from './utils/auth.js';
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 mongoose.connect(
-  'mongodb+srv://test:1234@cluster0.gbaka.mongodb.net/posuto?retryWrites=true&w=majority',
+  process.env.MONGODB_URI ||
+    'mongodb+srv://test:1234@cluster0.gbaka.mongodb.net/posuto?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
   },
@@ -27,11 +28,13 @@ mongoose.connect(
 mongoose.Promise = global.Promise;
 
 // server setup
-let port;
-async function configServer() {
-  port = 3000 || (await detectPort(3000));
-}
-configServer();
+// let port;
+// async function configServer() {
+//   port = process.env.PORT || 3000 || (await detectPort(3000));
+// }
+// configServer();
+
+const PORT = process.env.PORT || 3000;
 
 // express setup
 const app = express();
@@ -48,10 +51,10 @@ app.use('/posts', authenticateUser, posts);
 app.use('/api', docs);
 
 // start
-app.listen(port, () =>
+app.listen(PORT, () =>
   console.log(
     `${chalk.white
       .bgHex('#41b883')
-      .bold(`VUE TIL SERVER IS RUNNING ON ${port}`)}`,
+      .bold(`POSUTO SERVER IS RUNNING ON ${PORT}`)}`,
   ),
 );

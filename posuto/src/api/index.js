@@ -3,13 +3,13 @@ import { setInterceptors } from '@/api/common/interceptors';
 
 function createAxiosInstance() {
   return axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://posuto.herokuapp.com/',
   });
 }
 // 액시오스 초기화 함수
 function createInstanceWithAuth(url) {
   const instance = axios.create({
-    baseURL: `http://localhost:3000/${url}`,
+    baseURL: `https://posuto.herokuapp.com/${url}`,
   });
   return setInterceptors(instance);
 }
