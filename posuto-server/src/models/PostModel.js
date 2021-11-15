@@ -28,7 +28,7 @@ const postSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-postSchema.index({ Users: 1, title: 1 });
+postSchema.index({ Users: 1, title: 1 }, { unique: true });
 const PostModel = mongoose.model('Posts', postSchema);
 
 export default PostModel;
