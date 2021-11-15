@@ -15,7 +15,7 @@ function getAuthFromCookie() {
   //   /(?:(?:^|.*;\s*)posuto_auth\s*=\s*([^;]*).*$)|^.*$/,
   //   '$1',
   // );
-  VueCookies.get('posuto_auth');
+  return VueCookies.get('posuto_auth');
 }
 
 function getUserFromCookie() {
@@ -23,7 +23,7 @@ function getUserFromCookie() {
   //   /(?:(?:^|.*;\s*)posuto_user\s*=\s*([^;]*).*$)|^.*$/,
   //   '$1',
   // );
-  VueCookies.get('posuto_user');
+  return VueCookies.get('posuto_user');
 }
 
 function deleteCookie(value) {
