@@ -49,6 +49,9 @@ export default {
 
   created() {
     this.fetchPostData();
+    if (!localStorage.getItem('post_color')) {
+      localStorage.setItem('post_color', '#FEC0CA');
+    }
     this.$store.dispatch('GET_POSTCOLOR');
   },
   methods: {
