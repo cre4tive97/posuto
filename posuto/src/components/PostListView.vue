@@ -244,7 +244,9 @@ export default {
   font-weight: 400;
   width: 100%;
 }
-
+.post__content {
+  white-space: pre-line;
+}
 .post__textarea:active,
 .post__textarea:focus,
 .post__input:focus,
