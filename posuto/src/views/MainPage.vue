@@ -80,7 +80,7 @@ export default {
       try {
         // 디폴트 포스트를 생성
         await addPostData({
-          title: `새포스트${this.postItems.length + 1}`,
+          title: '',
           contents: '',
           position: [{ width: '3', height: '3', x: '0', y: '0' }],
           isEditing: true,
