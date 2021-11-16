@@ -186,4 +186,4 @@ Tech Stack : <br/>
 
 ## 🔑 License
 
-MIT License
+[MIT License](./LICENSE)
