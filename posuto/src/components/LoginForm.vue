@@ -2,7 +2,13 @@
   <form class="form" @submit.prevent="submitForm">
     <div class="form-box">
       <label for="username">Username</label>
-      <input class="input" id="username" type="text" v-model="username" />
+      <input
+        class="input"
+        id="username"
+        type="text"
+        v-model="username"
+        autocomplete="username"
+      />
       <p
         style="color: red; position: relative"
         v-if="!isUsernameValid && username !== ''"
@@ -12,7 +18,13 @@
     </div>
     <div class="form-box">
       <label for="password">Password</label>
-      <input class="input" id="password" type="password" v-model="password" />
+      <input
+        class="input"
+        id="password"
+        type="password"
+        v-model="password"
+        autocomplete="current-password"
+      />
     </div>
     <button class="btn" :disabled="!isUsernameValid || !username || !password">
       Login

@@ -152,7 +152,7 @@ export default {
       this.grid.on('change', (event, items) => {
         // 수정버튼 클릭시 Form에 내용 작성할 경우 또한 'change'로 감지됨.
         // 모든 수정버튼이 비활성화 되었을 때에만 custom event 보냄.
-        if (this.isEditing === false) {
+        if (this.isEditing === false || this.isEditing === undefined) {
           this.$emit('save:position', this.setCurrentPositionValue(items));
         }
       });
