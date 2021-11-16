@@ -85,7 +85,6 @@ Tech Stack : <br/>
 </br>
 
 ## 🛠 기술 스택 & 배포 환경
-
 + 기술스택
     - Vue.js 2
     - Vue Router
@@ -97,8 +96,9 @@ Tech Stack : <br/>
     - Front-end : Netlify
     - Back-end : Heroku
 
-## ⚙️ 개발 환경
+</br>
 
+## ⚙️ 개발 환경
 + [Chrome](https://www.google.co.kr/chrome/)
 + [Git](https://git-scm.com/downloads)
 + [VSC](https://code.visualstudio.com/)
