@@ -183,7 +183,9 @@ Tech Stack : <br/>
     - 이중반복, 복잡한 if문 등등 자료구조/알고리즘 공부가 필요해보임.
 
 </br>
+</br>
 
 ## 🔑 License
 
+![](https://img.shields.io/badge/LICENSE-MIT-critical) </br>
 [MIT License](./LICENSE)
