@@ -53,7 +53,6 @@ export default {
     this.fetchPostData();
     this.setPostColor();
     this.$store.dispatch('GET_POSTCOLOR');
-    this.setAccessRecord();
   },
   methods: {
     // 전체 포스트 조회
@@ -65,6 +64,8 @@ export default {
         const { data } = await getPostData();
         this.postItems = data.posts;
         this.postItemsEmptyCheck();
+        await this.createFirstAccessDefaultPost();
+        this.setAccessRecord();
         this.isLoading = false;
       } catch (error) {
         // 권한 에러 뜰 경우 login페이지로 이동
@@ -201,7 +202,23 @@ export default {
     postItemsEmptyCheck() {
       if (this.postItems.length === 0)
         this.$store.commit('setPostEmptyStatus', true);
-      else this.$store.commit('setPostEmptyStatus', false);
+    },
+    // PostItems 비어있고, localStorage에 'access'가 없다면, 디폴트 포스트를 생성
+    async createFirstAccessDefaultPost() {
+      if (
+        this.$store.state.postEmptyStatus === true &&
+        localStorage.getItem('access') === null
+      ) {
+        await addPostData({
+          title: 'Hello Posuto!',
+          contents: `Posuto를 사용해주셔서 감사합니다!
+          우측 하단의 포스트 버튼을 누르면 새로운 포스트를 생성할 수 있습니다.
+          설정 버튼을 누르면 포스트의 색상을 변경할 수 있습니다.`,
+          position: [{ width: '5', height: '5', x: '3', y: '3' }],
+          isEditing: false,
+        });
+        this.$router.go();
+      }
     },
   },
 };
