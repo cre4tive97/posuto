@@ -56,6 +56,7 @@ export default {
       localStorage.setItem('post_color', '#FEC0CA');
     }
     this.$store.dispatch('GET_POSTCOLOR');
+    this.setAccessRecord();
   },
 
   methods: {
@@ -189,6 +190,10 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    // 메인페이지 최초 접속시 localStorage에 기록 남김
+    setAccessRecord() {
+      if (!localStorage.getItem('access')) localStorage.setItem('access', true);
     },
   },
 };

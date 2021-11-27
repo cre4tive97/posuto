@@ -15,6 +15,7 @@ export default new Vuex.Store({
     token: getAuthFromCookie() || '',
     nickname: getUserFromCookie() || '',
     postColor: '#FEC0CA',
+    postEmptyStatus: false,
   },
   getters: {
     isLogin(state) {
