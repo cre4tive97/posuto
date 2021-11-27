@@ -51,14 +51,10 @@ export default {
   created() {
     // 포스트 조회
     this.fetchPostData();
-    // 로컬스토리지에 post_color 없다면 기본 컬러 저장
-    if (!localStorage.getItem('post_color')) {
-      localStorage.setItem('post_color', '#FEC0CA');
-    }
+    this.setPostColor();
     this.$store.dispatch('GET_POSTCOLOR');
     this.setAccessRecord();
   },
-
   methods: {
     // 전체 포스트 조회
     async fetchPostData() {
@@ -68,6 +64,7 @@ export default {
         // 포스트 데이터 불러오기
         const { data } = await getPostData();
         this.postItems = data.posts;
+        this.postItemsEmptyCheck();
         this.isLoading = false;
       } catch (error) {
         // 권한 에러 뜰 경우 login페이지로 이동
@@ -191,9 +188,20 @@ export default {
         console.log(error);
       }
     },
+    // 로컬스토리지에 post_color 없다면 기본 컬러 저장
+    setPostColor() {
+      if (!localStorage.getItem('post_color'))
+        localStorage.setItem('post_color', '#FEC0CA');
+    },
     // 메인페이지 최초 접속시 localStorage에 기록 남김
     setAccessRecord() {
       if (!localStorage.getItem('access')) localStorage.setItem('access', true);
+    },
+    // PostItems 비어있으면 스토어에 체크함
+    postItemsEmptyCheck() {
+      if (this.postItems.length === 0)
+        this.$store.commit('setPostEmptyStatus', true);
+      else this.$store.commit('setPostEmptyStatus', false);
     },
   },
 };

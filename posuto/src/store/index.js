@@ -38,6 +38,9 @@ export default new Vuex.Store({
     setPostColor(state, color) {
       state.postColor = color;
     },
+    setPostEmptyStatus(state, isEmpty) {
+      state.postEmptyStatus = isEmpty;
+    },
   },
   actions: {
     async LOGIN_USER({ commit }, userData) {
