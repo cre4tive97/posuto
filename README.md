@@ -4,7 +4,9 @@
 </p>
 
 *<p align="center">Just post it. <br/>*
-배포 : <a href="https://posuto.netlify.app/" target="_blank">https://posuto.netlify.app/</a>
+배포 : <a href="https://posuto.netlify.app/" target="_blank">https://posuto.netlify.app/</a> </br>
+</br>
+![](https://img.shields.io/badge/LICENSE-MIT-critical)
 </p>
 
 
@@ -185,7 +187,12 @@ Tech Stack : <br/>
 </br>
 </br>
 
+## 📍 Update 
+- 최초 접속시 서비스 이용 가이드를 적은 디폴트 포스트를 생성해 UX를 개선했습니다.
+
+</br>
+</br>
+
 ## 🔑 License
 
-![](https://img.shields.io/badge/LICENSE-MIT-critical) </br>
 [MIT License](./LICENSE)
