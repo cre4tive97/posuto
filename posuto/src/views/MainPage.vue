@@ -209,6 +209,7 @@ export default {
         this.$store.state.postEmptyStatus === true &&
         localStorage.getItem('access') === null
       ) {
+        // 디폴트 포스트 생성
         await addPostData({
           title: 'Hello Posuto!',
           contents: `Posuto를 사용해주셔서 감사합니다!
@@ -217,6 +218,7 @@ export default {
           position: [{ width: '5', height: '5', x: '3', y: '3' }],
           isEditing: false,
         });
+        // GridStack reload
         this.$router.go();
       }
     },
