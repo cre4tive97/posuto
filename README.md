@@ -6,14 +6,19 @@
 *<p align="center">Just post it. <br/>*
 배포 : <a href="https://posuto.netlify.app/" target="_blank">https://posuto.netlify.app/</a> </br>
 </br>
-![](https://img.shields.io/badge/LICENSE-MIT-critical)
+![License](https://img.shields.io/badge/LICENSE-MIT-critical)
+![Version](https://img.shields.io/badge/Version-2.0-%23f67aff)
+</br>
+*Vue 3 Composition API + Typescript*
 </p>
+</br>
 
 
 Tech Stack : <br/>
-![Vue](https://img.shields.io/badge/Vue.js-%5E2.0-success)
-![Vue-Router](https://img.shields.io/badge/Vue%20Router-%5E3.5.3-green)
-![Vuex](https://img.shields.io/badge/Vuex-%5E3.6.2-orange)
+![Typescript](https://img.shields.io/badge/Typescript-4.1.5-blue)
+![Vue.js](https://img.shields.io/badge/Vue.js-3.0-success)
+![Vue-Router](https://img.shields.io/badge/Vue%20Router-%5E4.0.0-green)
+![Vuex](https://img.shields.io/badge/Vuex-%5E4.0.0-orange)
 ![Express.js](https://img.shields.io/badge/Express.js-%5E4.16.4-red)
 ![mongoose](https://img.shields.io/badge/mongoose-%5E5.4.20-yellowgreen)
 
