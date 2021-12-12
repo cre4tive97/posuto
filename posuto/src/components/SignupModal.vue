@@ -11,13 +11,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'SignupModal',
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "SignupModal",
   props: {
-    nickname: String,
+    nickname: {
+      type: String,
+      required: true,
+    },
   },
-};
+});
 </script>
 
 <style scoped>

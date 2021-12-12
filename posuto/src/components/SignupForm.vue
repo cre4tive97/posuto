@@ -48,54 +48,67 @@
   </form>
 </template>
 
-<script>
-import { registerUser } from '@/api/auth';
-import SignupModal from '@/components/SignupModal.vue';
-import FormMixin from '@/mixins/FormMixin';
-export default {
-  name: 'SignUpForm',
+<script lang="ts">
+import { defineComponent, ref, computed } from "vue";
+import SignupModal from "@/components/SignupModal.vue";
+import { SignupSuccess } from "@/types/types";
+import { validateUsername } from "@/utils/validation";
+import { registerUser } from "@/api/auth";
+
+export default defineComponent({
+  name: "SignupForm",
   components: {
     SignupModal,
   },
-  data() {
-    return {
-      //form data
-      username: '',
-      password: '',
-      nickname: '',
-      // modal
-      registerdNickname: '',
-      signupSuccess: false,
-    };
-  },
-  mixins: [FormMixin],
-  methods: {
+  setup() {
+    //form data
+    const username = ref("");
+    const password = ref("");
+    const nickname = ref("");
+    // modal
+    const registerdNickname = ref("");
+    const signupSuccess = ref(false);
+    // computed
+    const isUsernameValid = computed(() => validateUsername(username.value));
+    // methods
     // 폼 제출할시 폼 데이터를 서버로 post 요청후, 모달창을 보여줌
-    async submitForm() {
+    async function submitForm() {
       try {
         const { data } = await registerUser({
-          username: this.username,
-          password: this.password,
-          nickname: this.nickname,
+          username: username.value,
+          password: password.value,
+          nickname: nickname.value,
         });
-        this.showSignupModal(data);
-      } catch (error) {
-        console.log(error.response);
-        if (error.response.status === 409) {
-          alert('이미 사용중인 Username 입니다!');
+        showSignupModal(data);
+      } catch (error: any) {
+        if (error.response?.status === 409) {
+          alert("이미 사용중인 Username 입니다!");
         }
-      } finally {
-        this.initForm();
       }
-    },
+    }
+    function initForm() {
+      username.value = "";
+      password.value = "";
+      nickname.value = "";
+    }
+    function showSignupModal(data: SignupSuccess) {
+      registerdNickname.value = data.nickname;
+      signupSuccess.value = true;
+    }
 
-    showSignupModal(data) {
-      console.log(data);
-      this.registerdNickname = data.nickname;
-      this.signupSuccess = true;
-    },
+    return {
+      username,
+      password,
+      nickname,
+      registerdNickname,
+      signupSuccess,
+      isUsernameValid,
+      submitForm,
+      initForm,
+      showSignupModal,
+    };
   },
-};
+});
 </script>
 
 <style scoped>

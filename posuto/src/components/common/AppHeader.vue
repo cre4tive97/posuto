@@ -16,30 +16,40 @@
   </div>
 </template>
 
-<script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
-import AppLogo from '@/components/common/AppLogo.vue';
-import { deleteCookie } from '@/utils/cookies';
-export default {
-  name: 'AppHeader',
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+import AppLogo from "@/components/common/AppLogo.vue";
+import { deleteCookie } from "@/utils/cookies";
+import { useRouter } from "vue-router";
+import { useStore } from "@/store/index";
+import { MutationTypes } from "@/store/mutations";
+
+export default defineComponent({
+  name: "AppHeader",
   components: {
     AppLogo,
   },
-  computed: {
-    ...mapState(['nickname']),
-    ...mapGetters(['isLogin']),
+  setup() {
+    const store = useStore();
+    const nickname = computed(() => store.state.nickname);
+    const isLogin = computed(() => store.getters.isLogin);
+    const router = useRouter();
+
+    function logout() {
+      store.commit(MutationTypes.CLEAR_TOKEN);
+      store.commit(MutationTypes.CLEAR_NICKNAME);
+      deleteCookie("posuto_user");
+      deleteCookie("posuto_auth");
+      router.push("/login");
+    }
+
+    return {
+      nickname,
+      isLogin,
+      logout,
+    };
   },
-  methods: {
-    ...mapMutations(['clearToken', 'clearNickname']),
-    logout() {
-      this.clearToken();
-      this.clearNickname();
-      deleteCookie('posuto_user');
-      deleteCookie('posuto_auth');
-      this.$router.push('/login');
-    },
-  },
-};
+});
 </script>
 
 <style scoped>

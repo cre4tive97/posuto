@@ -7,14 +7,14 @@
   </div>
 </template>
 
-<script>
-import LoginForm from '@/components/LoginForm.vue';
+<script lang="ts">
+import { defineComponent } from "vue";
+import LoginForm from "@/components/LoginForm.vue";
 
-export default {
+export default defineComponent({
+  name: "LoginPage",
   components: {
     LoginForm,
   },
-};
+});
 </script>
-
-<style scoped></style>

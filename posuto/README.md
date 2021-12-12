@@ -1,4 +1,4 @@
-# posuto
+# posuto-ts
 
 ## Project setup
 ```

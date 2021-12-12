@@ -5,20 +5,21 @@
   </div>
 </template>
 
-<script>
-import AppHeader from '@/components/common/AppHeader.vue';
+<script lang="ts">
+import { defineComponent } from "vue";
+import AppHeader from "@/components/common/AppHeader.vue";
 
-export default {
-  name: 'App',
+export default defineComponent({
+  name: "App",
   components: {
     AppHeader,
   },
-};
+});
 </script>
 
 <style>
-@import './css/reset.css';
-@import './css/style.css';
+@import "./css/reset.css";
+@import "./css/style.css";
 #app {
   height: 100vh;
 }
