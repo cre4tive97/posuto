@@ -199,6 +199,11 @@ Tech Stack : <br/>
 </br>
 </br>
 
+## 📂 Version
+- [Version 1.0](https://github.com/cre4tive97/posuto-vue2)
+
 ## 🔑 License
+</br>
+</br>
 
 [MIT License](./LICENSE)
