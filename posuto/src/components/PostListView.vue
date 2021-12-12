@@ -87,6 +87,7 @@ export default {
   methods: {
     // 포스트 위에 마우스 올릴 시 버튼을 보여줌
     onMouseOver(i) {
+      console.log(this.$refs.btnGroup);
       this.$refs.btnGroup[i].classList.remove('hidden');
     },
     // 포스트 위에서 마우스가 사라지면 버튼을 사라지게 함
@@ -186,6 +187,7 @@ export default {
           id: item.el.id,
         });
       });
+      console.log(items);
       return position;
     },
   },

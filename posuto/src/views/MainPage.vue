@@ -45,7 +45,7 @@ export default {
       settingState: false,
       updateStatus: false,
       isLoading: false,
-      isEditing: undefined,
+      isEditing: false,
     };
   },
   created() {
@@ -86,7 +86,7 @@ export default {
         });
         // Refresh (gridStack reload)
         await this.fetchPostData();
-        this.$router.go();
+        this.$router.go(0);
       } catch (error) {
         if (error.response.status === 400) {
           alert('새로운 포스트가 이미 존재합니다.');
@@ -94,6 +94,7 @@ export default {
           alert(
             '서버에 문제가 있어 포스트를 생성하지 못했습니다. 잠시 후 다시 시도해주세요.',
           );
+          this.$router.go(0);
         }
       }
     },
@@ -111,6 +112,7 @@ export default {
           alert(
             '서버에 문제가 있어 포스트를 삭제하지 못했습니다. 잠시 후 다시 시도해주세요.',
           );
+          this.$router.go();
         }
       }
     },
@@ -122,6 +124,7 @@ export default {
     // 수정 완료, 데이터 저장
     async finishEditing(postItem, postData) {
       const id = postItem._id;
+
       try {
         // 기존 제목과 컨텐츠 변경이 없을경우
         if (postData.title === '' && postData.contents === '') {
@@ -166,12 +169,14 @@ export default {
     },
     // 포지션 변경시 전체 포스트 위치 저장
     async savePosition(positionArray) {
+      console.log(positionArray);
       // custom event로 받아온 포지션 배열 내부 객체의 id Key의 value를 배열에 담음
       let positionId = positionArray.map(position => position.id);
       // 서버에서 받아온 포스트 데이터와 custom event로 받아온 포지션 데이터를 비교해 id가 같은 배열을 리턴함.
       let changedPostItems = this.postItems.filter(item => {
         return positionId.includes(item._id) ? item : null;
       });
+      console.log(changedPostItems);
       // 이중 for문 쓰기 싫은데, 이틀간 고민해도 마땅한 코드가 생각나지 않음..
       // positionArray와 changedPostItems의 객체의 id를 비교해 changedPostItems의 position 수정함.
       positionArray.forEach(positionValue => {

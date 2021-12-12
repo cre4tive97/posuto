@@ -80,6 +80,7 @@ export default {
         });
         this.showSignupModal(data);
       } catch (error) {
+        console.log(error.response);
         if (error.response.status === 409) {
           alert('이미 사용중인 Username 입니다!');
         }
@@ -89,6 +90,7 @@ export default {
     },
 
     showSignupModal(data) {
+      console.log(data);
       this.registerdNickname = data.nickname;
       this.signupSuccess = true;
     },
