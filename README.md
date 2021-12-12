@@ -193,8 +193,8 @@ Tech Stack : <br/>
 </br>
 
 ## 📍 Update 
-- 최초 접속시 서비스 이용 가이드를 적은 디폴트 포스트를 생성해 UX를 개선했습니다.
-- Vue3 + Typescript migration 준비중.
+- 최초 접속시 서비스 이용 가이드를 적은 디폴트 포스트를 생성해 UX를 개선했습니다. (Version 1.0 done)
+- Vue3 + Typescript 마이그레이션 완료. (Version 2.0 done)
 
 </br>
 </br>
