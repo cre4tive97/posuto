@@ -8,7 +8,7 @@ import {
   deletePostData,
   updatePostData,
 } from "@/api/posts";
-import { ref } from "vue";
+import { Ref, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "@/store";
 import {
@@ -78,19 +78,19 @@ async function createFirstAccessDefaultPost() {
     await addPostData({
       title: "Hello Posuto!",
       contents: `Posuto를 사용해주셔서 감사합니다!
-      포스트를 더블클릭하여 드래그/수정 모드로 전환할 수 있습니다.
-      우측 하단의 포스트 버튼을 누르면 새로운 포스트를 생성할 수 있습니다.
-      설정 버튼을 누르면 포스트의 색상을 변경할 수 있습니다.`,
-      position: { width: 500, height: 500, x: 50, y: 50, z: 1 },
+포스트를 더블클릭하여 드래그/수정 모드로 전환할 수 있습니다.
+우측 하단의 포스트 버튼을 누르면 새로운 포스트를 생성할 수 있습니다.
+설정 버튼을 누르면 포스트의 색상을 변경할 수 있습니다.`,
+      position: { width: 470, height: 200, x: 50, y: 50, z: 1 },
       isDraggable: false,
     });
     postItems.value.push({
       title: "Hello Posuto!",
       contents: `Posuto를 사용해주셔서 감사합니다!
-      포스트를 더블클릭하여 드래그/수정 모드로 전환할 수 있습니다.
-      우측 하단의 포스트 버튼을 누르면 새로운 포스트를 생성할 수 있습니다.
-      설정 버튼을 누르면 포스트의 색상을 변경할 수 있습니다.`,
-      position: { width: 500, height: 500, x: 50, y: 50, z: 1 },
+포스트를 더블클릭하여 드래그/수정 모드로 전환할 수 있습니다.
+우측 하단의 포스트 버튼을 누르면 새로운 포스트를 생성할 수 있습니다.
+설정 버튼을 누르면 포스트의 색상을 변경할 수 있습니다.`,
+      position: { width: 470, height: 200, x: 50, y: 50, z: 1 },
       isDraggable: false,
     });
   }
@@ -197,6 +197,16 @@ function postItemsEmptyCheck() {
   if (postItems.value.length === 0)
     store.commit(MutationTypes.SET_POST_EMPTY_STATUS, true);
 }
+
+// mouseover시 hidden 클래스 토글
+const post = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>;
+const setting = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>;
+function onMouseOver(el: HTMLButtonElement) {
+  el.classList.remove("hidden");
+}
+function onMouseLeave(el: HTMLButtonElement) {
+  el.classList.add("hidden");
+}
 </script>
 <template>
   <Spinner v-if="isLoading" />
@@ -214,10 +224,22 @@ function postItemsEmptyCheck() {
   <transition name="settingAnimation">
     <AppSetting v-if="settingState" />
   </transition>
-  <button class="add__btn" @click="createNewPost">
+  <button
+    @mouseover="onMouseOver(post)"
+    @mouseleave="onMouseLeave(post)"
+    class="add__btn"
+    @click="createNewPost"
+  >
     <i class="far fa-sticky-note"></i>
+    <span ref="post" class="hidden btn__span">Post</span>
   </button>
-  <button class="setting__btn" @click="settingState = !settingState">
+  <button
+    class="setting__btn"
+    @click="settingState = !settingState"
+    @mouseover="onMouseOver(setting)"
+    @mouseleave="onMouseLeave(setting)"
+  >
     <i class="fas fa-cog"></i>
+    <span ref="setting" class="hidden btn__span">Setting</span>
   </button>
 </template>

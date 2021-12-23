@@ -81,6 +81,16 @@ body {
 
 /* Fixed buttons */
 
+  .setting__btn:hover,
+  .add__btn:hover {
+    transform: scale(1.1);
+    color: rgba(94, 154, 198,1);
+    cursor: pointer;
+    width: 6.5rem;
+    justify-content: center;
+    border-radius: 30%;
+    
+  }
   .setting__btn {
     position: fixed;
     bottom: 1rem;
@@ -88,20 +98,13 @@ body {
     border-style: none;
     font-size: 2rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     color: rgba(94, 154, 198, 0.7);
     border-radius: 50%;
     transition: all 0.3s;
-  }
-  .setting__btn:hover,
-  .add__btn:hover {
-    transform: scale(1.1);
-    color: rgba(94, 154, 198,1);
-    cursor: pointer;
   }
   .add__btn  {
     position: fixed;
@@ -117,6 +120,10 @@ body {
     color: rgba(94, 154, 198, 0.7);
     border-radius: 50%;
     transition: all 0.3s;
+  }
+  .btn__span {
+    font-size: 1.2rem;
+    margin-left: 8px;
   }
 
   /* Animation */

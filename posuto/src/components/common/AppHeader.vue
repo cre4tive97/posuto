@@ -51,7 +51,7 @@ function logout(): void {
   );
   padding: 0 12px;
   z-index: 5;
-  position: sticky;
+  position: fixed;
   top: 0;
 }
 .header__menu {
