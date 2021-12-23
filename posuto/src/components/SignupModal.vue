@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import { toRefs } from "vue";
-import { SignupModalProps } from "@/types/props";
+import { useRouter } from "vue-router";
 
-const props = defineProps<SignupModalProps>();
+const router = useRouter();
+const props = defineProps<{ nickname: string }>();
 const { nickname } = toRefs(props);
+
+function goToLogin() {
+  router.push("/login");
+}
 </script>
 
 <template>
@@ -11,10 +16,10 @@ const { nickname } = toRefs(props);
     <div class="modal__white">
       <h1 class="modal__greeting">회원 가입을 축하합니다!</h1>
       <span class="modal__text"
-        ><em style="font-size: 1.25rem">{{ nickname }} </em>님, Posuto를 마음껏
+        ><em style="font-size: 1.25rem">{{ nickname }}</em> 님, Posuto를 마음껏
         이용해보세요!😆</span
       >
-      <button @click="$router.push('/login')" class="btn">Get Started</button>
+      <button @click="goToLogin" class="btn">Get Started</button>
     </div>
   </div>
 </template>

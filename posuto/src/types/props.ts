@@ -22,5 +22,5 @@ export interface PostItemType {
 }
 
 export interface SignupModalProps {
-  nickname: string;
+  nickname: string | undefined;
 }
