@@ -23,6 +23,7 @@ import {
 import { PostItemType } from "@/types/types";
 import { MutationTypes } from "@/store/mutations";
 import axios from "axios";
+import { ActionTypes } from "@/store/actions";
 
 // Router & Store
 const router = useRouter();
@@ -62,6 +63,8 @@ function changeContents(emitContentsData: EmitChangeContents) {
 
 // created
 fetchPostData();
+setPostColor();
+store.dispatch(ActionTypes.GET_POSTCOLOR);
 
 // Logic
 
@@ -91,16 +94,6 @@ async function createFirstAccessDefaultPost() {
       isDraggable: false,
     });
   }
-}
-
-// 메인페이지 최초 접속시 localStorage에 기록 남김
-function setAccessRecord() {
-  if (!localStorage.getItem("access")) localStorage.setItem("access", "true");
-}
-// PostItems 비어있으면 스토어에 체크함
-function postItemsEmptyCheck() {
-  if (postItems.value.length === 0)
-    store.commit(MutationTypes.SET_POST_EMPTY_STATUS, true);
 }
 
 // 드래그 가능 토글
@@ -188,6 +181,21 @@ async function editPost(i: number) {
       );
     }
   }
+}
+
+// 로컬스토리지에 post_color 없다면 기본 컬러 저장
+function setPostColor() {
+  if (!localStorage.getItem("post_color"))
+    localStorage.setItem("post_color", "#FEC0CA");
+}
+// 메인페이지 최초 접속시 localStorage에 기록 남김
+function setAccessRecord() {
+  if (!localStorage.getItem("access")) localStorage.setItem("access", "true");
+}
+// PostItems 비어있으면 스토어에 체크함
+function postItemsEmptyCheck() {
+  if (postItems.value.length === 0)
+    store.commit(MutationTypes.SET_POST_EMPTY_STATUS, true);
 }
 </script>
 <template>
