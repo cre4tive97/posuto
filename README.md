@@ -70,19 +70,28 @@ Tech Stack : <br/>
 
 + 성공적으로 회원가입을 마쳤다면, 귀여운 모달창이 알려줍니다.
 
+</br>
+
 <p align="center">
-<img src="./img/main.gif" width="500" />
+<img src="./img/default.png" width="500" />
 </p>
 
-+ 우측 하단 포스트 버튼을 클릭시, 새로운 Default 포스트가 생성됩니다.
-+ 포스트에 마우스를 올리고 수정 버튼을 활성화하면, 포스트가 수정이 가능한 Form 형태가 됩니다.
-+ 수정을 마쳤다면, 다시 수정 버튼을 클릭해 비활성화하면, Drag&Drop/Resize 가능한 포스트잇 됩니다.
-+ Drag&Drop/Resize 이벤트가 발생시 서버에 PUT 요청을 보내, 유저 포스트의 Position 값을 실시간 저장 합니다.
++ 최초 로그인시 간단한 메뉴얼이 적힌 포스트가 생성됩니다.
 
 </br>
 
 <p align="center">
-<img src="./img/setting.gif" width="300" />
+<img src="./img/main.gif" width="500" />
+</p>
+
++ 우측 하단 포스트 버튼을 클릭시, 새로운 포스트를 생성합니다..
++ 포스트를 더블클릭하여 드래그/수정 모드로 토글할 수 있습니다.
++ 드래그/수정 이벤트가 발생시 서버에 PUT 요청을 보내, 유저 포스트의 Position 값을 실시간 저장 합니다.
+
+</br>
+
+<p align="center">
+<img src="./img/setting.gif" width="500" />
 </p>
 
 + 우측 하단 설정버튼을 클릭시, 포스트잇 배경색을 선택하는 창이 나옵니다.
@@ -118,7 +127,8 @@ Tech Stack : <br/>
 
 </br>
 
-의존성 라이브러리는 [package.json](./posuto/package.json)을 참조해주세요.
+의존성 라이브러리는 [package.json](./posuto/package.json)을 참조해주세요. </br>
+
 
 </br>
 
@@ -193,14 +203,42 @@ Tech Stack : <br/>
 </br>
 
 ## 📍 Update 
-- 최초 접속시 서비스 이용 가이드를 적은 디폴트 포스트를 생성해 UX를 개선했습니다. (Version 1.0 done)
-- Vue3 + Typescript 마이그레이션 완료. (Version 2.0 done)
++ 최초 접속시 서비스 이용 가이드를 적은 디폴트 포스트를 생성해 UX를 개선했습니다. (Version 1.0 done)
++ Vue3 + Typescript 마이그레이션 완료. (Version 2.0 done)
++ Vue3 + Typescript Script Setup 적용 / Gridstack => VueUse로 라이브러리 변경
+</br>
+</br>
+
+## 🔍 Update log
+
+</br>
+
+### Vue3로 마이그레이션 한 이유
+</br>
+
+#### Composition API
++ Vue2의 Options API는 data, method 등등 인스턴스의 옵션들이 모두 this 바인딩을 기준으로 타입이 추론되므로, 타입스크립트와 적합하지 않다고 판단했습니다.(물론 Vue2 + Composition API로 일정부분 해결되는 문제이지만, 후술할 내용의 문제가 있음)
+
+#### Vuex 4
++ Vuex3는 타입스크립트 친화적이지 않습니다. 컴포넌트 레벨에서 import한 스토어의 타입을 추론하려면, node_modules/vuex 의 vue.d.ts 파일을 삭제하고 vue.d.ts를 extend하는 새로운 d.ts 파일을 생성해 커스텀해야 합니다. 또한 오픈소스화 이후 다른 사람이 clone 했을 때, node_modules/vuex/vue.d.ts 파일을 다시 삭제해야 한다는 번거로움이 있습니다.
+
+#### Script Setup
++ Script Setup은 Composition API을 유지하며 사용 가능한 Syntactic sugar입니다. 전역메소드 등으로 코드를 더 간결하게 만들 수 있다는 장점이 있습니다. 반응성을 부여한 변수 또는 선언한 함수를 따로 리턴하지 않아도 Template에서 사용 가능한 점이 가장 편했습니다.
+
+</br>
+
+### VueUse
+
+</br>
+
++ 기존에는 드래그&드롭 + 그리드 라이브러리로, Gridstack을 사용했었습니다. 그러나 Gridstack은 포스트를 추가, 삭제 하는 과정에서 리프레쉬가 필수적이었고(라이브러리를 리로드 함에도 뷰단에서 적용할 수 없음), 이는 UX저하의 큰 요인중 하나라고 생각하여 고민하고 있었습니다. 그러던 중 우연히 단톡방에서 VueUse라는 유틸 라이브러리를 보았고, useDraggable과 useElementSize를 활용해 적용 가능하겠다고 생각했습니다. 덕분에, CRUD의 모든 기능을 리프레쉬 없이 구현했습니다.
 
 </br>
 </br>
 
 ## 📂 Version
 - [Version 1.0](https://github.com/cre4tive97/posuto-vue2)
+- [Version 2.0](https://github.com/cre4tive97/posuto_v2)
 
 ## 🔑 License
 </br>
