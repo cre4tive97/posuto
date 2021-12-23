@@ -56,6 +56,7 @@ function selectPostColor(color: string) {
   color: #f5f5f6;
   display: flex;
   flex-direction: column;
+  z-index: 4;
 }
 h1 {
   font-size: 1.5rem;
