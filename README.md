@@ -9,7 +9,8 @@
 ![License](https://img.shields.io/badge/LICENSE-MIT-critical)
 ![Version](https://img.shields.io/badge/Version-2.0-%23f67aff)
 </br>
-*Vue 3 Composition API + Typescript*
+*Vue 3 Script Setup + Typescript + VueUse* </br>
+Newest Version 😋
 </p>
 </br>
 
