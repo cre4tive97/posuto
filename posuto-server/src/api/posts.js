@@ -38,25 +38,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const doc = await PostModel.findOne({
-      createdBy: req.user._id,
-      _id: req.params.id,
-    })
-      .lean()
-      .exec();
-
-    if (!doc) {
-      return res.status(400).json({ message: 'The data is not found' });
-    }
-
-    res.status(200).json({ ...doc });
-  } catch (error) {
-    console.error(error);
-    res.status(400).json({ message: 'sth wrong', error });
-  }
-});
 
 router.put('/:id', async (req, res) => {
   try {

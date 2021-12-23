@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+import { toRefs } from "vue";
+import { SignupModalProps } from "@/types/props";
+
+const props = defineProps<SignupModalProps>();
+const { nickname } = toRefs(props);
+</script>
+
 <template>
   <div class="modal">
     <div class="modal__white">
@@ -10,19 +18,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "SignupModal",
-  props: {
-    nickname: {
-      type: String,
-      required: true,
-    },
-  },
-});
-</script>
 
 <style scoped>
 .modal {

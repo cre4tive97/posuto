@@ -33,24 +33,25 @@ export interface SignupSuccess {
 }
 
 export interface Position {
-  width?: string;
-  height?: string;
-  x?: string;
-  y?: string;
-  id?: string;
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  z: number;
+  id?: number;
 }
 
 export interface PostDataType {
   title: string;
   contents: string;
-  position: Position[] | Position;
-  isEditing: boolean;
+  position: Position;
+  isDraggable: boolean;
 }
 
 export interface PostItemType extends PostDataType {
-  createdAt: string;
-  createdBy: string;
-  updatedAt: string;
-  __v: number;
-  _id: string;
+  createdAt?: string;
+  createdBy?: string;
+  updatedAt?: string;
+  __v?: number;
+  _id?: string;
 }

@@ -5,6 +5,7 @@ const PositionSchema = new mongoose.Schema({
   height: Number,
   x: Number,
   y: Number,
+  z: Number,
 });
 const postSchema = new mongoose.Schema(
   {
@@ -14,8 +15,8 @@ const postSchema = new mongoose.Schema(
       maxlength: 50,
     },
     contents: String,
-    position: [PositionSchema],
-    isEditing: {
+    position: PositionSchema,
+    isDraggable: {
       type: Boolean,
       default: true,
     },
