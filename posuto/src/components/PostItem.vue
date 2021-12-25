@@ -31,6 +31,9 @@ const contents = ref(postItem.value.contents);
 const createdTime = computed(() => {
   return translateDate("createdAt");
 });
+const updatedTime = computed(() => {
+  return translateDate("updatedAt");
+});
 
 // UTC Date 변환
 type BeforeTranslateDate = "createdAt" | "updatedAt";
@@ -217,7 +220,10 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
         </div>
       </div>
       <div ref="timestampDraggable" class="timestamp hidden">
-        <span class="timestamp__text">{{ createdTime }} 생성됨</span>
+        <span v-if="!updatedTime" class="timestamp__text"
+          >{{ createdTime }} 생성됨</span
+        >
+        <span v-else class="timestamp__text">{{ updatedTime }} 수정됨</span>
       </div>
     </div>
     <div
@@ -270,7 +276,10 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
           </form>
         </div>
         <div ref="timestampSizable" class="timestamp hidden">
-          <span class="timestamp__text">{{ createdTime }} 생성됨</span>
+          <span v-if="!updatedTime" class="timestamp__text"
+            >{{ createdTime }} 생성됨</span
+          >
+          <span v-else class="timestamp__text">{{ updatedTime }} 수정됨</span>
         </div>
       </div>
     </div>
