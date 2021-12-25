@@ -340,4 +340,11 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
   overflow: visible;
   width: 100%;
 }
+.timestamp {
+  position: absolute;
+  bottom: 5px;
+}
+.timestamp__text {
+  overflow: hidden;
+}
 </style>
