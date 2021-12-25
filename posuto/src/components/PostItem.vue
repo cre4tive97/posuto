@@ -161,12 +161,27 @@ function onMouseOver(el: HTMLDivElement | undefined) {
 function onMouseLeave(el: HTMLDivElement | undefined) {
   if (el) el.classList.add("hidden");
 }
+
+// function removeHiddenClass() {
+//   onMouseOver(btnGroupDraggable.value);
+//   onMouseOver(timestampDraggable.value);
+// }
+// function addHiddenClass() {
+//   onMouseLeave(btnGroupSizable.value);
+//   onMouseLeave(timestampSizable.value);
+// }
 </script>
 <template>
   <div class="post">
     <div
-      @mouseover="onMouseOver(btnGroupDraggable)"
-      @mouseleave="onMouseLeave(btnGroupDraggable)"
+      @mouseover="
+        onMouseOver(btnGroupDraggable);
+        onMouseOver(timestampDraggable);
+      "
+      @mouseleave="
+        onMouseLeave(btnGroupDraggable);
+        onMouseLeave(timestampDraggable);
+      "
       v-show="postItem.isDraggable"
       class="post__item draggable"
       ref="postDraggableElement"
@@ -191,13 +206,19 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
           {{ contents }}
         </div>
       </div>
-      <div ref="timestampDraggable" class="timestamp">
-        <span class="timestamp__text hidden">{{ postItem.createdAt }}</span>
+      <div ref="timestampDraggable" class="timestamp hidden">
+        <span class="timestamp__text">{{ postItem.createdAt }}</span>
       </div>
     </div>
     <div
-      @mouseover="onMouseOver(btnGroupSizable)"
-      @mouseleave="onMouseLeave(btnGroupSizable)"
+      @mouseover="
+        onMouseOver(btnGroupSizable);
+        onMouseOver(timestampSizable);
+      "
+      @mouseleave="
+        onMouseLeave(btnGroupSizable);
+        onMouseLeave(timestampSizable);
+      "
       v-show="!postItem.isDraggable"
       ref="postSizeElement"
       class="post__item resizable"
@@ -238,8 +259,8 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
             ></textarea>
           </form>
         </div>
-        <div ref="timestampSizable" class="timestamp">
-          <span class="timestamp__text hidden">{{ postItem.createdAt }}</span>
+        <div ref="timestampSizable" class="timestamp hidden">
+          <span class="timestamp__text">{{ postItem.createdAt }}</span>
         </div>
       </div>
     </div>
