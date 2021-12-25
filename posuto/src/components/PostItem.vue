@@ -151,6 +151,8 @@ const { x, y, style } = useDraggable(postDraggableElement, {
 });
 const btnGroupDraggable = ref<HTMLDivElement>();
 const btnGroupSizable = ref<HTMLDivElement>();
+const timestampSizable = ref<HTMLDivElement>();
+const timestampDraggable = ref<HTMLDivElement>();
 // 포스트 위에 마우스 올릴 시 버튼을 보여줌
 function onMouseOver(el: HTMLDivElement | undefined) {
   if (el) el.classList.remove("hidden");
@@ -189,7 +191,7 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
           {{ contents }}
         </div>
       </div>
-      <div class="timestamp">
+      <div ref="timestampDraggable" class="timestamp">
         <span class="timestamp__text hidden">{{ postItem.createdAt }}</span>
       </div>
     </div>
@@ -235,6 +237,9 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
               @input="matchContents($event)"
             ></textarea>
           </form>
+        </div>
+        <div ref="timestampSizable" class="timestamp">
+          <span class="timestamp__text hidden">{{ postItem.createdAt }}</span>
         </div>
       </div>
     </div>
