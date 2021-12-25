@@ -28,6 +28,19 @@ const emits = defineEmits([
 // State
 const title = ref(postItem.value.title);
 const contents = ref(postItem.value.contents);
+const createdTime = computed(() => {
+  const beforeTranslatedDate = postItem.value.createdAt as string;
+  const year = new Date(beforeTranslatedDate).getFullYear();
+  const month = new Date(beforeTranslatedDate).getMonth() + 1;
+  let date = new Date(beforeTranslatedDate).getDate();
+  if (date < 10) {
+    let newDate = `0${date.toString()}`;
+    date = parseInt(newDate);
+  }
+  const hour = new Date(beforeTranslatedDate).getHours();
+  const minute = new Date(beforeTranslatedDate).getMinutes();
+  return `${year}년 ${month}월 ${date}일 ${hour}:${minute}`;
+});
 
 // title state와 title input value 일치화
 function matchTitle(e: Event) {
@@ -161,15 +174,6 @@ function onMouseOver(el: HTMLDivElement | undefined) {
 function onMouseLeave(el: HTMLDivElement | undefined) {
   if (el) el.classList.add("hidden");
 }
-
-// function removeHiddenClass() {
-//   onMouseOver(btnGroupDraggable.value);
-//   onMouseOver(timestampDraggable.value);
-// }
-// function addHiddenClass() {
-//   onMouseLeave(btnGroupSizable.value);
-//   onMouseLeave(timestampSizable.value);
-// }
 </script>
 <template>
   <div class="post">
@@ -207,7 +211,7 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
         </div>
       </div>
       <div ref="timestampDraggable" class="timestamp hidden">
-        <span class="timestamp__text">{{ postItem.createdAt }}</span>
+        <span class="timestamp__text">{{ createdTime }} 생성됨</span>
       </div>
     </div>
     <div
@@ -260,7 +264,7 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
           </form>
         </div>
         <div ref="timestampSizable" class="timestamp hidden">
-          <span class="timestamp__text">{{ postItem.createdAt }}</span>
+          <span class="timestamp__text">{{ createdTime }} 생성됨</span>
         </div>
       </div>
     </div>
@@ -343,8 +347,10 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
 .timestamp {
   position: absolute;
   bottom: 5px;
+  right: 5px;
 }
 .timestamp__text {
-  overflow: hidden;
+  font-size: 0.75rem;
+  font-weight: 100;
 }
 </style>
