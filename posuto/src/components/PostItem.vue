@@ -29,7 +29,13 @@ const emits = defineEmits([
 const title = ref(postItem.value.title);
 const contents = ref(postItem.value.contents);
 const createdTime = computed(() => {
-  const beforeTranslatedDate = postItem.value.createdAt as string;
+  return translateDate("createdAt");
+});
+
+// UTC Date 변환
+type BeforeTranslateDate = "createdAt" | "updatedAt";
+function translateDate(beforeTranslate: BeforeTranslateDate) {
+  const beforeTranslatedDate = postItem.value[beforeTranslate] as string;
   const year = new Date(beforeTranslatedDate).getFullYear();
   const month = new Date(beforeTranslatedDate).getMonth() + 1;
   let date = new Date(beforeTranslatedDate).getDate();
@@ -40,7 +46,7 @@ const createdTime = computed(() => {
   const hour = new Date(beforeTranslatedDate).getHours();
   const minute = new Date(beforeTranslatedDate).getMinutes();
   return `${year}년 ${month}월 ${date}일 ${hour}:${minute}`;
-});
+}
 
 // title state와 title input value 일치화
 function matchTitle(e: Event) {
