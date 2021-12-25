@@ -189,6 +189,9 @@ function onMouseLeave(el: HTMLDivElement | undefined) {
           {{ contents }}
         </div>
       </div>
+      <div class="timestamp">
+        <span class="timestamp__text hidden">{{ postItem.createdAt }}</span>
+      </div>
     </div>
     <div
       @mouseover="onMouseOver(btnGroupSizable)"
